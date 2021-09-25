@@ -1,0 +1,16 @@
+{
+  "name": "myflix-client",
+  "version": "1.0.0",
+  "description": "myFlix front end module",
+  "main": "src/index.html",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RemiGolec/myFlix-client.git"
+  },
+  "author": "Remi Golec",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RemiGolec/myFlix-client/issues"
+  },
+  "homepage": "https://github.com/RemiGolec/myFlix-client#readme"
+}
