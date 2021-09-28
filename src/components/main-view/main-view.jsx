@@ -3,14 +3,15 @@ import React from 'react';
 class MainView extends React.Component {
 
     render() {
-        resturn(
+        return (
             <div className="main-view">
                 <div>Inception</div>
                 <div>Redemption</div>
-                <div>Galdstone</div>
+                <div>Gladstone</div>
             </div>
         );
     }
 }
 
 export default MainView;
+
