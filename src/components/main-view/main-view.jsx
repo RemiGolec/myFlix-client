@@ -1,6 +1,8 @@
 import React from 'react';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
+import IMAGES from '../../../src/images/index';
+
 
 class MainView extends React.Component {
 
@@ -10,11 +12,11 @@ class MainView extends React.Component {
             movies: [
                 {
                     _id: 1,
-                    Title: 'Inception',
-                    Description: 'desc1...',
-                    ImagePath: '../movie-artwork/Broken Flowers.png',
-                    Genre: '...',
-                    Director: '...'
+                    Title: 'Broken Flowers',
+                    Description: 'The film focuses on an ageing \"Don Juan\" who embarks on a cross-country journey to track down four of his former lovers after receiving an anonymous letter stating that he has a son.',
+                    ImagePath: '..',
+                    Genre: 'comedy-drama',
+                    Director: 'Jim Jarmusch'
                 },
                 {
                     _id: 2,
