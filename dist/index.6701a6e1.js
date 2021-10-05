@@ -22762,7 +22762,14 @@ class MainView extends _reactDefault.default.Component {
                     _id: 2,
                     Title: 'The Shawshank Redemption',
                     Description: 'desc2...',
-                    ImagePath: '...',
+                    ImagePath: /*#__PURE__*/ _jsxRuntime.jsx("img", {
+                        src: _indexDefault.default.Shawshank_Redemption.png,
+                        __source: {
+                            fileName: "src/components/main-view/main-view.jsx",
+                            lineNumber: 25
+                        },
+                        __self: this
+                    }),
                     Genre: '...',
                     Director: '...'
                 },
@@ -23056,7 +23063,6 @@ class MovieView extends _reactDefault.default.Component {
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx("img", {
                         src: movie.ImagePath,
-                        width: "300",
                         __source: {
                             fileName: "src/components/movie-view/movie-view.jsx",
                             lineNumber: 11
@@ -23201,11 +23207,12 @@ class MovieView extends _reactDefault.default.Component {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 const IMAGES = {
-    Broken_Flowers: require('./Broken_Flowers.png').default
+    Broken_Flowers: require('./Broken_Flowers.png').default,
+    Shawshank_Redemption: require('./Shawshank_Redemption.png').default
 };
 exports.default = IMAGES;
 
-},{"./Broken_Flowers.png":"4h9E9","@parcel/transformer-js/src/esmodule-helpers.js":"hMm45"}],"4h9E9":[function(require,module,exports) {
+},{"./Broken_Flowers.png":"4h9E9","@parcel/transformer-js/src/esmodule-helpers.js":"hMm45","./Shawshank_Redemption.png":"iEguL"}],"4h9E9":[function(require,module,exports) {
 module.exports = require('./helpers/bundle-url').getBundleURL('3VpAv') + "Broken_Flowers.e15f619e.png";
 
 },{"./helpers/bundle-url":"awYB6"}],"awYB6":[function(require,module,exports) {
@@ -23243,6 +23250,9 @@ exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
 exports.getOrigin = getOrigin;
 
-},{}],"jUTZ8":[function() {},{}]},["fO0zQ","au5hf","dLPEP"], "dLPEP", "parcelRequireaec4")
+},{}],"iEguL":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('3VpAv') + "Shawshank_Redemption.59c2b501.png";
+
+},{"./helpers/bundle-url":"awYB6"}],"jUTZ8":[function() {},{}]},["fO0zQ","au5hf","dLPEP"], "dLPEP", "parcelRequireaec4")
 
 //# sourceMappingURL=index.6701a6e1.js.map

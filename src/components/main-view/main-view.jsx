@@ -22,7 +22,7 @@ class MainView extends React.Component {
                     _id: 2,
                     Title: 'The Shawshank Redemption',
                     Description: 'desc2...',
-                    ImagePath: '...',
+                    ImagePath: <img src={IMAGES.Shawshank_Redemption.png} />,
                     Genre: '...',
                     Director: '...'
                 },
