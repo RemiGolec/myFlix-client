@@ -14,7 +14,7 @@ class MainView extends React.Component {
                     _id: 1,
                     Title: 'Broken Flowers',
                     Description: 'The film focuses on an ageing \"Don Juan\" who embarks on a cross-country journey to track down four of his former lovers after receiving an anonymous letter stating that he has a son.',
-                    ImagePath: '..',
+                    ImagePath: IMAGES.Broken_Flowers,
                     Genre: 'comedy-drama',
                     Director: 'Jim Jarmusch'
                 },
@@ -22,7 +22,7 @@ class MainView extends React.Component {
                     _id: 2,
                     Title: 'The Shawshank Redemption',
                     Description: 'desc2...',
-                    ImagePath: <img src={IMAGES.Shawshank_Redemption.png} />,
+                    ImagePath: IMAGES.Shawshank_Redemption,
                     Genre: '...',
                     Director: '...'
                 },

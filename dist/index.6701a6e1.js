@@ -22754,7 +22754,7 @@ class MainView extends _reactDefault.default.Component {
                     _id: 1,
                     Title: 'Broken Flowers',
                     Description: 'The film focuses on an ageing \"Don Juan\" who embarks on a cross-country journey to track down four of his former lovers after receiving an anonymous letter stating that he has a son.',
-                    ImagePath: '..',
+                    ImagePath: _indexDefault.default.Broken_Flowers,
                     Genre: 'comedy-drama',
                     Director: 'Jim Jarmusch'
                 },
@@ -22762,14 +22762,7 @@ class MainView extends _reactDefault.default.Component {
                     _id: 2,
                     Title: 'The Shawshank Redemption',
                     Description: 'desc2...',
-                    ImagePath: /*#__PURE__*/ _jsxRuntime.jsx("img", {
-                        src: _indexDefault.default.Shawshank_Redemption.png,
-                        __source: {
-                            fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 25
-                        },
-                        __self: this
-                    }),
+                    ImagePath: _indexDefault.default.Shawshank_Redemption,
                     Genre: '...',
                     Director: '...'
                 },
@@ -23212,7 +23205,7 @@ const IMAGES = {
 };
 exports.default = IMAGES;
 
-},{"./Broken_Flowers.png":"4h9E9","@parcel/transformer-js/src/esmodule-helpers.js":"hMm45","./Shawshank_Redemption.png":"iEguL"}],"4h9E9":[function(require,module,exports) {
+},{"./Broken_Flowers.png":"4h9E9","./Shawshank_Redemption.png":"iEguL","@parcel/transformer-js/src/esmodule-helpers.js":"hMm45"}],"4h9E9":[function(require,module,exports) {
 module.exports = require('./helpers/bundle-url').getBundleURL('3VpAv') + "Broken_Flowers.e15f619e.png";
 
 },{"./helpers/bundle-url":"awYB6"}],"awYB6":[function(require,module,exports) {
