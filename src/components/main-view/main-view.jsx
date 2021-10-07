@@ -28,11 +28,11 @@ class MainView extends React.Component {
                 },
                 {
                     _id: 3,
-                    Title: 'Gladiator',
-                    Description: 'desc3...',
-                    ImagePath: '...',
-                    Genre: '...',
-                    Director: '...'
+                    Title: 'BlacKkKlansman',
+                    Description: 'BlacKkKlansman is a 2018 American biographical crime comedy film directed by Spike Lee and written by Charlie Wachtel, David Rabinowitz, Kevin Willmott and Lee, based on the 2014 memoir Black Klansman by Ron Stallworth.',
+                    ImagePath: IMAGES.BlackKKlansman,
+                    Genre: 'crime-comedy',
+                    Director: 'Spike Lee'
                 }
             ],
             selectedMovie: null

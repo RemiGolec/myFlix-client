@@ -1,6 +1,7 @@
-const IMAGES = {
-    Broken_Flowers: require('./Broken_Flowers.png').default,
-    Shawshank_Redemption: require('./Shawshank_Redemption.png').default,
-}
+import bf from './Broken_Flowers.png';
+import sr from './Shawshank_Redemption.png';
+import bk from './BlackKKlansman.png';
+
+const IMAGES = { Broken_Flowers: bf, Shawshank_Redemption: sr, BlackKKlansman: bk };
 
 export default IMAGES;

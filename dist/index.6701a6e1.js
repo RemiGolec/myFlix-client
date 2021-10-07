@@ -22768,11 +22768,11 @@ class MainView extends _reactDefault.default.Component {
                 },
                 {
                     _id: 3,
-                    Title: 'Gladiator',
-                    Description: 'desc3...',
-                    ImagePath: '...',
-                    Genre: '...',
-                    Director: '...'
+                    Title: 'BlacKkKlansman',
+                    Description: 'BlacKkKlansman is a 2018 American biographical crime comedy film directed by Spike Lee and written by Charlie Wachtel, David Rabinowitz, Kevin Willmott and Lee, based on the 2014 memoir Black Klansman by Ron Stallworth.',
+                    ImagePath: _indexDefault.default.BlackKKlansman,
+                    Genre: 'crime-comedy',
+                    Director: 'Spike Lee'
                 }
             ],
             selectedMovie: null
@@ -23056,6 +23056,7 @@ class MovieView extends _reactDefault.default.Component {
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx("img", {
                         src: movie.ImagePath,
+                        width: "200",
                         __source: {
                             fileName: "src/components/movie-view/movie-view.jsx",
                             lineNumber: 11
@@ -23199,13 +23200,20 @@ class MovieView extends _reactDefault.default.Component {
 },{"react/jsx-runtime":"8xIwr","react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"hMm45","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"8tZg2"}],"j9gub":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+var _brokenFlowersPng = require("./Broken_Flowers.png");
+var _brokenFlowersPngDefault = parcelHelpers.interopDefault(_brokenFlowersPng);
+var _shawshankRedemptionPng = require("./Shawshank_Redemption.png");
+var _shawshankRedemptionPngDefault = parcelHelpers.interopDefault(_shawshankRedemptionPng);
+var _blackKKlansmanPng = require("./BlackKKlansman.png");
+var _blackKKlansmanPngDefault = parcelHelpers.interopDefault(_blackKKlansmanPng);
 const IMAGES = {
-    Broken_Flowers: require('./Broken_Flowers.png').default,
-    Shawshank_Redemption: require('./Shawshank_Redemption.png').default
+    Broken_Flowers: _brokenFlowersPngDefault.default,
+    Shawshank_Redemption: _shawshankRedemptionPngDefault.default,
+    BlackKKlansman: _blackKKlansmanPngDefault.default
 };
 exports.default = IMAGES;
 
-},{"./Broken_Flowers.png":"4h9E9","./Shawshank_Redemption.png":"iEguL","@parcel/transformer-js/src/esmodule-helpers.js":"hMm45"}],"4h9E9":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"hMm45","./Broken_Flowers.png":"4h9E9","./Shawshank_Redemption.png":"iEguL","./BlackKKlansman.png":"7KNXx"}],"4h9E9":[function(require,module,exports) {
 module.exports = require('./helpers/bundle-url').getBundleURL('3VpAv') + "Broken_Flowers.e15f619e.png";
 
 },{"./helpers/bundle-url":"awYB6"}],"awYB6":[function(require,module,exports) {
@@ -23245,6 +23253,9 @@ exports.getOrigin = getOrigin;
 
 },{}],"iEguL":[function(require,module,exports) {
 module.exports = require('./helpers/bundle-url').getBundleURL('3VpAv') + "Shawshank_Redemption.59c2b501.png";
+
+},{"./helpers/bundle-url":"awYB6"}],"7KNXx":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('3VpAv') + "BlackKKlansman.8cf9f40e.png";
 
 },{"./helpers/bundle-url":"awYB6"}],"jUTZ8":[function() {},{}]},["fO0zQ","au5hf","dLPEP"], "dLPEP", "parcelRequireaec4")
 
