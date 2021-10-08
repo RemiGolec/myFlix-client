@@ -1,4 +1,6 @@
 import React from 'react';
+import axios from 'axios';
+
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import IMAGES from '../../../src/images/index';
@@ -9,34 +11,21 @@ class MainView extends React.Component {
     constructor() {
         super();
         this.state = {
-            movies: [
-                {
-                    _id: 1,
-                    Title: 'Broken Flowers',
-                    Description: 'The film focuses on an ageing \"Don Juan\" who embarks on a cross-country journey to track down four of his former lovers after receiving an anonymous letter stating that he has a son.',
-                    ImagePath: IMAGES.Broken_Flowers,
-                    Genre: 'comedy-drama',
-                    Director: 'Jim Jarmusch'
-                },
-                {
-                    _id: 2,
-                    Title: 'The Shawshank Redemption',
-                    Description: 'desc2...',
-                    ImagePath: IMAGES.Shawshank_Redemption,
-                    Genre: '...',
-                    Director: '...'
-                },
-                {
-                    _id: 3,
-                    Title: 'BlacKkKlansman',
-                    Description: 'BlacKkKlansman is a 2018 American biographical crime comedy film directed by Spike Lee and written by Charlie Wachtel, David Rabinowitz, Kevin Willmott and Lee, based on the 2014 memoir Black Klansman by Ron Stallworth.',
-                    ImagePath: IMAGES.BlackKKlansman,
-                    Genre: 'crime-comedy',
-                    Director: 'Spike Lee'
-                }
-            ],
+            movies: [],
             selectedMovie: null
         };
+    }
+
+    componentDidMount() {
+        axios.get('https://morning-badlands-52426.herokuapp.com/movies')
+            .then(response => {
+                this.setState({
+                    movies: response.data
+                });
+            })
+            .catch(error => {
+                console.log(error);
+            });
     }
 
     setSelectedMovie(newSelectedMovie) {
@@ -48,7 +37,7 @@ class MainView extends React.Component {
     render() {
         const { movies, selectedMovie } = this.state;
 
-        if (movies.length === 0) return <div className="main-view">The list is empty!</div>;
+        if (movies.length === 0) return <div className="main-view">Loading...!</div>;
 
         return (
             <div className="main-view">
@@ -56,7 +45,7 @@ class MainView extends React.Component {
                     ? <MovieView movie={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }} />
                     : movies.map(movie => (
                         <MovieCard key={movie._id} movie={movie}
-                            onMovieClick={(movie) => { this.setSelectedMovie(movie) }} />
+                            onMovieClick={(newSelectedMovie) => { this.setSelectedMovie(newSelectedMovie) }} />
                     ))
                 }
             </div>
