@@ -47,6 +47,14 @@ class MainView extends React.Component {
         });
       }
 
+        /* NOT SURE THIS CODE IS CORRECT */
+    onRegistration(user) {
+        this.setState({
+            user
+        });
+    }
+
+
     render() {
         const { movies, selectedMovie } = this.state;
 
