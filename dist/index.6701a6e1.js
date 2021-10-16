@@ -22766,9 +22766,9 @@ class MainView extends _reactDefault.default.Component {
     }
     /*When a movie is clicked, 
     sthis function is invoked and 
-    updates the state of the `selectedMovie` *property to that movie*/ setSelectedMovie(newSelectedMovie) {
+    updates the state of the `selectedMovie` *property to that movie*/ setSelectedMovie(movie) {
         this.setState({
-            selectedMovie: newSelectedMovie
+            selectedMovie: movie
         });
     }
     /* When a user successfully logs in, 
@@ -22780,30 +22780,28 @@ class MainView extends _reactDefault.default.Component {
     render() {
         const { movies , selectedMovie  } = this.state;
         /* If there is no user, the LoginView is rendered. 
-        If there is a user logged in, the user details are *passed as a prop to the LoginView*/ if (!user) return;
-        /*#__PURE__*/ _jsxRuntime.jsx(_loginView.LoginView, {
+        If there is a user logged in, the user details are *passed as a prop to the LoginView*/ if (!user) return(/*#__PURE__*/ _jsxRuntime.jsx(_loginView.LoginView, {
             onLoggedIn: (user)=>this.onLoggedIn(user)
             ,
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 56
+                lineNumber: 55
             },
             __self: this
-        });
+        }));
         /* Before the movies have been loaded */ if (movies.length === 0) return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
             className: "main-view",
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 59
+                lineNumber: 58
             },
-            __self: this,
-            children: "Loading...!"
+            __self: this
         }));
         return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
             className: "main-view",
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 62
+                lineNumber: 61
             },
             __self: this,
             children: selectedMovie ? /*#__PURE__*/ _jsxRuntime.jsx(_movieView.MovieView, {
@@ -25455,19 +25453,94 @@ $parcel$ReactRefreshHelpers$02dd.prelude(module);
 
 try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "LoginView", ()=>LoginView
+);
+var _jsxRuntime = require("react/jsx-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
-const handleSubmit = (e)=>{
-    e.preventDefault();
-    console.log(username, password);
-    /* Send a request to the server for authentication */ /* then call props.onLoggedIn(username) */ props.onLoggedIn(username);
-};
+var _s = $RefreshSig$();
+function LoginView(props) {
+    _s();
+    const [username, setUsername] = _react.useState('');
+    const [password, setPassword] = _react.useState('');
+    const handleSubmit = (e)=>{
+        e.preventDefault();
+        console.log(username, password);
+        /* Send a request to the server for authentication */ /* then call props.onLoggedIn(username) */ props.onLoggedIn(username);
+    };
+    return(/*#__PURE__*/ _jsxRuntime.jsxs("form", {
+        __source: {
+            fileName: "src/components/login-view/login-view.jsx",
+            lineNumber: 17
+        },
+        __self: this,
+        children: [
+            /*#__PURE__*/ _jsxRuntime.jsxs("label", {
+                __source: {
+                    fileName: "src/components/login-view/login-view.jsx",
+                    lineNumber: 18
+                },
+                __self: this,
+                children: [
+                    "Username:",
+                    /*#__PURE__*/ _jsxRuntime.jsx("input", {
+                        type: "text",
+                        value: username,
+                        onChange: (e)=>setUsername(e.target.value)
+                        ,
+                        __source: {
+                            fileName: "src/components/login-view/login-view.jsx",
+                            lineNumber: 20
+                        },
+                        __self: this
+                    })
+                ]
+            }),
+            /*#__PURE__*/ _jsxRuntime.jsxs("label", {
+                __source: {
+                    fileName: "src/components/login-view/login-view.jsx",
+                    lineNumber: 22
+                },
+                __self: this,
+                children: [
+                    "Password:",
+                    /*#__PURE__*/ _jsxRuntime.jsx("input", {
+                        type: "password",
+                        value: password,
+                        onChange: (e)=>setPassword(e.target.value)
+                        ,
+                        __source: {
+                            fileName: "src/components/login-view/login-view.jsx",
+                            lineNumber: 24
+                        },
+                        __self: this
+                    })
+                ]
+            }),
+            /*#__PURE__*/ _jsxRuntime.jsx("button", {
+                type: "submit",
+                onClick: handleSubmit,
+                __source: {
+                    fileName: "src/components/login-view/login-view.jsx",
+                    lineNumber: 26
+                },
+                __self: this,
+                children: "Submit"
+            })
+        ]
+    }));
+}
+_s(LoginView, "9FY2cPL9VBDmuhjwpF2ik6flsHs=");
+_c = LoginView;
+var _c;
+$RefreshReg$(_c, "LoginView");
 
   $parcel$ReactRefreshHelpers$02dd.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"hMm45","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"8tZg2"}],"jUTZ8":[function() {},{}]},["fO0zQ","au5hf","dLPEP"], "dLPEP", "parcelRequireaec4")
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","@parcel/transformer-js/src/esmodule-helpers.js":"hMm45","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"8tZg2"}],"jUTZ8":[function() {},{}]},["fO0zQ","au5hf","dLPEP"], "dLPEP", "parcelRequireaec4")
 
 //# sourceMappingURL=index.6701a6e1.js.map
