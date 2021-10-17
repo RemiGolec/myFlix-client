@@ -56,7 +56,7 @@ class MainView extends React.Component {
 
 
     render() {
-        const { movies, selectedMovie } = this.state;
+        const { movies, selectedMovie, user } = this.state;
 
         /* If there is no user, the LoginView is rendered. 
         If there is a user logged in, the user details are *passed as a prop to the LoginView*/
@@ -67,7 +67,7 @@ class MainView extends React.Component {
 
         return (
             <div className="main-view">
-              {/*If the state of `selectedMovie` is not null, that selected movie will be returned otherwise, all *movies will be returned*/}
+             {/* If the state of `selectedMovie` is not null, that selected movie will be returned otherwise, all *movies will be returned */ }
               {selectedMovie
                 ? <MovieView movie={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }}/>
                 : movies.map(movie => (
