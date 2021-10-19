@@ -1,13 +1,11 @@
-
-
-/* the following code was copied from login-view 
-NOT SURE THIS CODE IS CORRECT */
-
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 export function RegistrationView (props) {
     const [ username, setUsername ] = useState('');
     const [ password, setPassword ] = useState('');
+    const [ email, setEmail ] = useState('');
+    const [ birthday, setBirthday ] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -27,7 +25,25 @@ export function RegistrationView (props) {
             Password:
             <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
           </label>
+          <label>
+            Email:
+            <input type="text" value={email} onChange={e => setEmail(e.target.value)} />
+          </label>
+          <label>
+            Birthday:
+            <input type="string" value={birthday} onChange={e => setBirthday(e.target.value)} />
+          </label>
           <button type="submit" onClick={handleSubmit}>Submit</button>
         </form>
       );
 }
+
+RegistrationView.propTypes = {
+    registration: PropTypes.shape({
+        username: PropTypes.string.isRequired,
+        password: PropTypes.string.isRequired,
+        email: PropTypes.string.isRequired,
+        birthday: PropTypes.string.isRequired
+    }),
+    onRegistration: PropTypes.func.isRequired
+};
