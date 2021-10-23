@@ -1,10 +1,14 @@
 import React from 'react';
 import axios from 'axios';
+import { Container, Row, Col, Navbar, Nav } from 'react-bootstrap';
 
 import { RegistrationView } from '../registration-view/registration-view';
 import { LoginView } from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
+
+// import Logo from '../../../src/logo/logo.png';
+
 
 class MainView extends React.Component {
 
@@ -69,19 +73,54 @@ class MainView extends React.Component {
         if (movies.length === 0) return <div className="main-view" />;
 
         return (
-            <div className="main-view">
-             {/* If the state of `selectedMovie` is not null, that selected movie will be returned otherwise, all *movies will be returned */ }
-              {selectedMovie
-                ? <MovieView movie={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }}/>
-                : movies.map(movie => (
-                  <MovieCard key={movie._id} movie={movie} onMovieClick={(newSelectedMovie) => { this.setSelectedMovie(newSelectedMovie) }}/>
-               ))
-              }
-            </div>
+            <Container>
+
+              <Navbar 
+                bg="dark" 
+                variant="dark"
+                fixed="top">
+                <Container>
+                  <Navbar.Brand href="#home">
+                    <img
+                      alt=""
+                      src={Logo}
+                      width="30"
+                      height="30"
+                      className="d-inline-block align-top"
+                    />{''}
+                  My FLiX
+                  </Navbar.Brand>
+                  <Nav className="me-auto">
+                      <Nav.Link href="#home">Home</Nav.Link>
+                      <Nav.Link href="#features">Features</Nav.Link>
+                      <Nav.Link href="#pricing">Pricing</Nav.Link>
+                  </Nav>
+                </Container>
+              </Navbar>
+              <Row className="main-view justify-content-md-center">
+              {/* If the state of `selectedMovie` is not null, that selected movie will be returned otherwise, all *movies will be returned */ }
+                {selectedMovie
+                  ? (
+                  // Do we need () around the <Row></Row>
+                    <Col lg={8}>
+                      <MovieView movie={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }}/>
+                    </Col>
+                    )
+                    :
+                    ( 
+                      movies.map(movie => (
+                      <Col md={3}>
+                        <MovieCard key={movie._id} movie={movie} onMovieClick={(newSelectedMovie) => { this.setSelectedMovie(newSelectedMovie); }}/>
+                      </Col>
+                    ))
+                  )
+                }
+              </Row>
+            </Container>
           );
-        }
-      
       }
+      
+}
 
 
 export default MainView;
