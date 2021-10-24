@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Form, Button, Container, Card } from 'react-bootstrap';
+import { Form, Button, Container, Card, Col, Row } from 'react-bootstrap';
 
 export function LoginView(props) {
   const [ username, setUsername ] = useState('');

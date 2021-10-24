@@ -6,7 +6,12 @@
   color: rgba(255, 255, 255, 0.844);
 }
 
-.my-flix {
+
+body {
+  background: #34a8eb;
+}
+
+.app-container {
   color: #34a8eb;
   background-color: black;
 }

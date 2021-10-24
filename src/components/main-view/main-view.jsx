@@ -1,13 +1,14 @@
 import React from 'react';
+import './main-view.scss';
 import axios from 'axios';
-import { Container, Row, Col, Navbar, Nav } from 'react-bootstrap';
+import { Container, Row, Col, Navbar, Nav, Button } from 'react-bootstrap';
 
 import { RegistrationView } from '../registration-view/registration-view';
 import { LoginView } from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 
-// import Logo from '../../../src/logo/logo.png';
+import Logo from '../../logo/logo.png';
 
 
 class MainView extends React.Component {
@@ -76,25 +77,33 @@ class MainView extends React.Component {
             <Container>
 
               <Navbar 
-                bg="dark" 
+                bg="dark"
+                expand="lg" 
                 variant="dark"
-                fixed="top">
+                sticky="top">
                 <Container>
                   <Navbar.Brand href="#home">
                     <img
                       alt=""
                       src={Logo}
-                      width="30"
-                      height="30"
+                      width="50"
+                      height="50"
                       className="d-inline-block align-top"
                     />{''}
-                  My FLiX
                   </Navbar.Brand>
+                  <Button 
+                    type="button"
+                    className="navbar-toggler"
+                    data-toggle="collapse"
+                    data-target="#responsive-navbar-nav">
+                      burger</Button>
+                  <Navbar.Collapse id="responsive-navbar-nav" >
                   <Nav className="me-auto">
                       <Nav.Link href="#home">Home</Nav.Link>
                       <Nav.Link href="#features">Features</Nav.Link>
                       <Nav.Link href="#pricing">Pricing</Nav.Link>
                   </Nav>
+                  </Navbar.Collapse>
                 </Container>
               </Navbar>
               <Row className="main-view justify-content-md-center">
