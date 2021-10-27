@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import { Form, Button, Container, Card, Col, Row } from 'react-bootstrap';
 
 export function LoginView(props) {
-  const [ username, setUsername ] = useState('');
-  const [ password, setPassword ] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -26,7 +26,7 @@ export function LoginView(props) {
                 <Form>
                   <Form.Group controlId="formUsername">
                     <Form.Label>Username:</Form.Label>
-                    <Form.Control 
+                    <Form.Control
                       type="text"
                       onChange={e => setUsername(e.target.value)}
                       placeholder="Enter username"
@@ -35,11 +35,11 @@ export function LoginView(props) {
 
                   <Form.Group controlId="formPassword">
                     <Form.Label>Password:</Form.Label>
-                    <Form.Control 
-                      type="password" 
+                    <Form.Control
+                      type="password"
                       onChange={e => setPassword(e.target.value)}
-                      placeholder="Enter password" 
-                      required/>
+                      placeholder="Enter password"
+                      required />
                   </Form.Group>
                   <Button variant="primary" type="submit" onClick={handleSubmit}>
                     Submit
@@ -51,14 +51,14 @@ export function LoginView(props) {
         </Col>
       </Row>
     </Container>
-    
+
   );
 }
 
 LoginView.propTypes = {
-    login: PropTypes.shape({
-        username: PropTypes.string.isRequired,
-        password: PropTypes.string.isRequired
-    }),
-    onLoggedIn: PropTypes.func.isRequired
+  login: PropTypes.shape({
+    username: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired
+  }),
+  onLoggedIn: PropTypes.func.isRequired
 };

@@ -5,19 +5,16 @@ import Container from 'react-bootstrap/Container';
 
 // Import statement to indicate that you need to bundle `./index.scss`
 import './index.scss';
-import Logo from '../src/logo/logo.png';
+
 
 // Main component (will eventually use all the others)
 class MyFlixApplication extends React.Component {
     render() {
         return (
             <Container>
-                <img 
-                    src={Logo}
-                    width="25%"
-                    />
-                <MainView />
-                
+
+                <MainView className="main-view" />
+
             </Container>
         );
     }

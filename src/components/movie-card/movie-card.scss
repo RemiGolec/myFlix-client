@@ -1,3 +1,8 @@
+$s-color: #71e8eec1;
+$s-light: #a7ffff;
+$s-dark: #34b5bc;
+
+
 .movie_card {
     margin-top: 1em;
     margin-bottom: 1em;
@@ -5,11 +10,45 @@
 }
 
 .card_image {
-    height: 100%;
+    height: 100%;   
+}
+
+.card_body {
+    color: white;
+    text-decoration: none;
+}
+
+
+.movie_card_link .card-title_image-overlay {
+    cursor: pointer;
+    text-decoration: none;
+    
     
 }
 
-.movie_card_link {
-    text-decoration: none;
-    cursor: pointer;
+.card-title_image-overlay {
+    font-size: 30px!important;
+    padding: 0.5em;
+    padding-top: 1em;
+    text-align: center;
+    height: 100%;
+    background: transparent;
+    color: transparent;
+    transition: 
+        color 1s ease-out 25ms, 
+        text-shadow 1s ease-out 25ms;
+        
+}
+
+
+.card-title_image-overlay:hover {
+    color: white;
+    background: linear-gradient(rgba(0, 0, 0, 1)1%,rgba(0, 0, 0, 0.5) ,rgba(0, 0, 0, 0) 100%);
+    font-size: 30px;
+    
+}
+
+.image-overlay {
+    padding: 0px!important;
+    
 }
