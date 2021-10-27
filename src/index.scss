@@ -1,13 +1,19 @@
 $color: black;
-$background-color: rgb(0, 0, 0);
+$background-color: #141414;
+
 $link-color: #71e8eec1;
-body {
-    background-color: $color;
-}
+
+$s-color: #71e8eec1;
+$s-light: #a7ffff;
+$s-dark: #34b5bc;
+
+
+
 .app-container {
-    color: $color;
     background-color: $background-color;
-};
+    min-height: 100vh;
+}
+
 
 
 

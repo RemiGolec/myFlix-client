@@ -1,0 +1,28 @@
+$s-color: #71e8eec1;
+$s-light: #a7ffff;
+$s-dark: #34b5bc;
+
+.main-view {
+    height: 100%;
+    
+}
+
+.navbar {
+    height: 90px;
+    margin-bottom: 10px;
+    background: linear-gradient(rgba(0, 0, 0, 1)50%,rgba(0, 0, 0, 0.5) ,rgba(0, 0, 0, 0) 100%);
+
+}
+
+
+
+.nav-link:hover {
+    color: $s-light !important;
+    
+}
+
+.nav-link {
+    margin-left: auto !important;
+}
+
+
