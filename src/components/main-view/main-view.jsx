@@ -23,15 +23,13 @@ class MainView extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('https://morning-badlands-52426.herokuapp.com/movies')
-      .then(response => {
-        this.setState({
-          movies: response.data
-        });
+    let accessToken = localStorage.getItem('token');
+    if (accessToken !== null) {
+      this.setState({
+        user: localStorage.getItem('user')
       })
-      .catch(error => {
-        console.log(error);
-      });
+      this.getMovies(accessToken);
+    }
   }
 
   getMovies(token) {
