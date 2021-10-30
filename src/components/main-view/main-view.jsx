@@ -34,6 +34,22 @@ class MainView extends React.Component {
       });
   }
 
+  getMovies(token) {
+    axios.get('https://morning-badlands-52426.herokuapp.com/movies', {
+      headers: { Authorization: 'Bearer ${token}' }
+    })
+      .then(response => {
+        // Assign the result to the state
+        this.setState({
+          movies: response.data
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+
   /*When a movie is clicked, 
   sthis function is invoked and 
   updates the state of the `selectedMovie` *property to that movie*/
@@ -47,11 +63,17 @@ class MainView extends React.Component {
   /* When a user successfully logs in, 
   this function updates the `user` property in state to that *particular user*/
 
-  onLoggedIn(user) {
+  onLoggedIn(authData) {
+    console.log(authData);
     this.setState({
-      user
+      user: authData.user.Username,
     });
+
+    localStorage.setItem('token', authData.token);
+    localStorage.setItem('user', authData.user.Username);
+    this.getMovies(authData.token);
   }
+
 
   /* NOT SURE THIS CODE IS CORRECT */
   onRegistration(user) {
@@ -66,7 +88,7 @@ class MainView extends React.Component {
 
     /* If there is no user, the LoginView is rendered. 
     If there is a user logged in, the user details are *passed as a prop to the LoginView*/
-    if (!user) return <RegistrationView onRegistration={user => this.onRegistration(user)} />;
+    /*if (!user) return <RegistrationView onRegistration={user => this.onRegistration(user)} />; */
 
     if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
 

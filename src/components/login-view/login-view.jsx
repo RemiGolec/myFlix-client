@@ -3,24 +3,45 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Button, Container, Card, Col, Row } from 'react-bootstrap';
 
+import Logo from '../../logo/logo.png';
+
+import axios from 'axios';
+
 export function LoginView(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(username, password);
     /* Send a request to the server for authentication */
-    /* then call props.onLoggedIn(username) */
-    props.onLoggedIn(username);
+    axios.post('https://morning-badlands-52426.herokuapp.com/login', {
+      Username: username,
+      Password: password
+    })
+      /* then call props.onLoggedIn(username),
+      which provides the username to our parent component (child to parent communication) */
+      .then(response => {
+        const data = response.data;
+        props.onLoggedIn(data);
+      })
+      .catch(e => {
+        console.log('no such user')
+      });
   };
+
 
   return (
     <Container>
-      <Row>
-        <Col>
-          <Card>
-            <Card.Group>
+      <div className="image-container">
+        <img
+          className="registration-view_logo"
+          src={Logo}
+        />
+      </div>
+      <div className="form-container">
+        <Row>
+          <Col>
+            <Card>
               <Card.Body>
                 <Card.Title>Please Login</Card.Title>
                 <Form>
@@ -41,15 +62,19 @@ export function LoginView(props) {
                       placeholder="Enter password"
                       required />
                   </Form.Group>
-                  <Button variant="primary" type="submit" onClick={handleSubmit}>
-                    Submit
+                  <Button
+                    className="button"
+                    variant="dark"
+                    type="submit"
+                    onClick={handleSubmit}>
+                    Login
                   </Button>
                 </Form>
               </Card.Body>
-            </Card.Group>
-          </Card>
-        </Col>
-      </Row>
+            </Card>
+          </Col>
+        </Row>
+      </div>
     </Container>
 
   );
