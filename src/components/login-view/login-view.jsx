@@ -1,11 +1,11 @@
 
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Form, Button, Container, Card, Col, Row } from 'react-bootstrap';
+import { Form, Button, Container, Card, Col, Row, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 
 import Logo from '../../logo/logo.png';
-
 import axios from 'axios';
+import { RegistrationView } from '../registration-view/registration-view';
 
 export function LoginView(props) {
   const [username, setUsername] = useState('');
@@ -25,7 +25,8 @@ export function LoginView(props) {
         props.onLoggedIn(data);
       })
       .catch(e => {
-        console.log('no such user')
+        console.log('no such user');
+        alert('please enter valid username and password');
       });
   };
 
@@ -62,13 +63,26 @@ export function LoginView(props) {
                       placeholder="Enter password"
                       required />
                   </Form.Group>
-                  <Button
-                    className="button"
-                    variant="dark"
-                    type="submit"
-                    onClick={handleSubmit}>
-                    Login
-                  </Button>
+                  <ButtonToolbar>
+                    <ButtonGroup className="me-5">
+                      <Button
+                        className="button"
+                        variant="dark"
+                        type="submit"
+                        onClick={handleSubmit}>
+                        Login
+                      </Button>
+                    </ButtonGroup>
+                    <ButtonGroup>
+                      <Button
+                        className="button"
+                        variant="dark"
+                        type="submit"
+                        onClick={RegistrationView}>
+                        Register work in progress
+                      </Button>
+                    </ButtonGroup>
+                  </ButtonToolbar>
                 </Form>
               </Card.Body>
             </Card>

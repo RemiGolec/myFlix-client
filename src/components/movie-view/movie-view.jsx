@@ -20,15 +20,12 @@ export class MovieView extends React.Component {
         const { movie, onBackClick } = this.props;
 
         return (
-
             <Container className="movie-view">
-
                 <Row >
                     <Col>
                         <Card.Img variant="bottom" src={movie.ImagePath} crossOrigin="anonymous" />
                     </Col>
                     <Col>
-
                         <Card.Body>
                             <Card.Title>{movie.Title}</Card.Title>
                             <Card.Text>{movie.Description}</Card.Text>
