@@ -1,17 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Card, Button, Container, Link } from 'react-bootstrap';
-
+import { Link } from 'react-router-dom';
 import './movie-card.scss';
 
 export class MovieCard extends React.Component {
   render() {
-    const { movie, onMovieClick } = this.props;
+    const { movie } = this.props;
 
     return (
-      <a
-        className="movie_card_link"
-        onClick={() => onMovieClick(movie)}>
+      <Card className="bg-transparent movie_card_background">
         <Card
           key={movie._id}
           className="bg-dark text-white movie_card">
@@ -25,7 +23,14 @@ export class MovieCard extends React.Component {
             <Card.Title className="card-title_image-overlay">{movie.Title}</Card.Title>
           </Card.ImgOverlay>
         </Card>
-      </a>
+        <Link to={`/movies/${movie._id}`}>
+          <Button variant="link">VIEW</Button>
+        </Link>
+        <Link to={`/directors/${movie.Director.Name}`}>
+          <Button variant="link">Director</Button>
+        </Link>
+      </Card>
+
     );
   }
 }
@@ -44,6 +49,5 @@ MovieCard.propTypes = {
       Description: PropTypes.string.isRequired
     }),
     ImagePath: PropTypes.string.isRequired,
-  }).isRequired,
-  onMovieClick: PropTypes.func.isRequired
+  }).isRequired
 };

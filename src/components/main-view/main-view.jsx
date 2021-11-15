@@ -8,6 +8,7 @@ import { RegistrationView } from '../registration-view/registration-view';
 import { LoginView } from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
+import { DirectorView } from '../director-view/director-view';
 
 import Logo from '../../logo/logo.png';
 
@@ -29,23 +30,6 @@ class MainView extends React.Component {
       user
     });
   }
-
-  /* When a user successfully logs in, 
-  this function updates the `user` property in state to that *particular user*/
-
-  onLoggedIn(authData) {
-    console.log(authData);
-    this.setState({
-      user: authData.user.Username,
-    });
-
-    localStorage.setItem('token', authData.token);
-    localStorage.setItem('user', authData.user.Username);
-    this.getMovies(authData.token);
-  }
-
-
-
 
   getMovies(token) {
     axios.get('https://morning-badlands-52426.herokuapp.com/movies', {
@@ -72,6 +56,17 @@ class MainView extends React.Component {
     }
   }
 
+  onLoggedIn(authData) {
+    console.log(authData);
+    this.setState({
+      user: authData.user.Username,
+    });
+
+    localStorage.setItem('token', authData.token);
+    localStorage.setItem('user', authData.user.Username);
+    this.getMovies(authData.token);
+  }
+
   onLoggedOut() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
@@ -94,10 +89,11 @@ class MainView extends React.Component {
 
   render() {
     console.log("render")
-    const { movies, selectedMovie, user } = this.state;
+    const { movies, user } = this.state;
     // if (!user) return <RegistrationView onRegistration={user => this.onRegistration(user)} />;
-    if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+    // console.log('should display movies now after successful registration but it isn\'t ');
 
+    if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
 
 
     /* Before the movies have been loaded */
@@ -106,19 +102,55 @@ class MainView extends React.Component {
     return (
 
       <Router>
+
+        <Navbar className="navbar"
+          collapseOnSelect
+          expand="lg"
+          variant="dark"
+          sticky="top">
+          <Container>
+            <Navbar.Brand href="#home">
+              <img
+                alt=""
+                src={Logo}
+                height="100"
+                className="d-inline-block align-top"
+              />{''}
+            </Navbar.Brand>
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            <Navbar.Collapse id="responsive-navbar-nav">
+              <Nav className="nav-link">
+                <Nav.Link href="#home" >Home</Nav.Link>
+                <Nav.Link href="#features">Features</Nav.Link>
+                <Nav.Link href="#pricing">Pricing</Nav.Link>
+                <Nav.Link onClick={() => { this.onLoggedOut() }}>Logout</Nav.Link>
+              </Nav>
+            </Navbar.Collapse>
+          </Container>
+        </Navbar>
+
         <Row className="main-view justify-content-md-center">
           <Route exact path="/" render={() => {
             console.log("rootpath");
-            return movies.map(movie => (
+            return movies.map(m => (
               <Col md={3}>
-                <MovieCard key={movie._id} movie={movie} onMovieClick={(newSelectedMovie) => { this.setSelectedMovie(newSelectedMovie); }} />
+                <MovieCard key={m._id} movie={m} />
               </Col>
             ))
           }} />
-          <Route path="/movies/:movieId" render={({ match }) => {
+
+          <Route exact path="/movies/:movieId" render={({ match }) => {
             console.log("movieview_path");
             return <Col lg={8}>
+              <MovieView movie={movies.find(m => m._id === match.params.movieId)} />
 
+            </Col>
+          }} />
+
+          <Route exact path="/directors/:name" render={({ match }) => {
+            if (movies.length === 0) return <div className="main-view" />;
+            <Col md={8}>
+              <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director} />
             </Col>
           }} />
         </Row>
