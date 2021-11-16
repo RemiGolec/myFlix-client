@@ -6,7 +6,7 @@ export class DirectorView extends React.Component {
     render() {
         console.log('director-view');
 
-        const { director, movie } = this.props;
+        const { director } = this.props;
 
         return (
             <Card className="bg-white movie_card_background">
