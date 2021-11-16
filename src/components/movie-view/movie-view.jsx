@@ -36,8 +36,9 @@ export class MovieView extends React.Component {
                             <Card.Text>{movie.Genre.Name}</Card.Text>
                         </Card.Body>
                         <Card.Body>
-                            <Card.Subtitle className="mb-2 text-muted">Director:</Card.Subtitle><Card.Text>{movie.Director.Name}</Card.Text>
-                            <Button onClick={() => { onBackClick(null); }}>Back</Button>
+                            <Card.Subtitle className="mb-2 text-muted">Director:</Card.Subtitle>
+                            <Card.Text>{movie.Director.Name}</Card.Text>
+                            <Button onClick={() => { onBackClick() }}>Back</Button>
                         </Card.Body>
                     </Col>
                 </Row>
