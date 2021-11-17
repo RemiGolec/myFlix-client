@@ -25,13 +25,6 @@ class MainView extends React.Component {
     };
   }
 
-  /* NOT SURE THIS CODE IS CORRECT */
-  onRegistration(user) {
-    this.setState({
-      user
-    });
-  }
-
   getMovies(token) {
     axios.get('https://morning-badlands-52426.herokuapp.com/movies', {
       headers: { Authorization: `Bearer ${token}` }
@@ -91,10 +84,9 @@ class MainView extends React.Component {
   render() {
     console.log("render")
     const { movies, user } = this.state;
-    // if (!user) return <RegistrationView onRegistration={user => this.onRegistration(user)} />;
+    if (!user) return <RegistrationView onRegistration={user => this.onRegistration(user)} />;
     // console.log('should display movies now after successful registration but it isn\'t ');
 
-    if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
 
 
     /* Before the movies have been loaded */
@@ -132,12 +124,18 @@ class MainView extends React.Component {
 
         <Row className="main-view justify-content-md-center">
           <Route exact path="/" render={() => {
+            if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+
             console.log("rootpath");
             return movies.map(m => (
               <Col md={3}>
                 <MovieCard key={m._id} movie={m} />
               </Col>
             ))
+          }} />
+
+          <Route exact path="/register" render={() => {
+            return <RegistrationView />
           }} />
 
           <Route exact path="/movies/:movieId" render={({ match, history }) => {

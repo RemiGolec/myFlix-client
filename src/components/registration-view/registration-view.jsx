@@ -1,7 +1,8 @@
 import './registration-view.scss';
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Form, Button, Card, CardGroup, Container, Col, Row, } from 'react-bootstrap';
+import { Form, Button, Card, CardGroup, Container, Col, Row, Link } from 'react-bootstrap';
+
 
 import Logo from '../../logo/logo.png'
 import axios from 'axios';
@@ -12,7 +13,7 @@ export function RegistrationView(props) {
   const [email, setEmail] = useState('');
   const [birthday, setBirthday] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleRegister = (e) => {
     e.preventDefault();
     /* Send a request to the server for authentication */
     axios.post('https://morning-badlands-52426.herokuapp.com/users', {
@@ -24,7 +25,10 @@ export function RegistrationView(props) {
       /* then call props.onRegistration(username) */
       .then(response => {
         const data = response.data;
+        console.log(data);
+        alert("successful registration");
         props.onRegistration(data);
+        window.open('/', '_self');
       })
       .catch(e => {
         console.log('wrong format or incomplete data');
@@ -91,7 +95,7 @@ export function RegistrationView(props) {
                       className="button"
                       variant="dark"
                       type="submit"
-                      onClick={handleSubmit}>
+                      onClick={handleRegister}>
                       Submit
                     </Button>
                   </Form>
@@ -99,6 +103,7 @@ export function RegistrationView(props) {
               </Card>
             </CardGroup>
           </Col>
+
         </Row>
       </div>
 
