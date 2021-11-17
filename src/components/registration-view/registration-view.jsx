@@ -1,7 +1,9 @@
 import './registration-view.scss';
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Form, Button, Card, CardGroup, Container, Col, Row, Link } from 'react-bootstrap';
+import { Form, Button, Card, CardGroup, Container, Col, Row } from 'react-bootstrap';
+import { BrowserRouter as Router, Link } from 'react-router-dom';
+
 
 
 import Logo from '../../logo/logo.png'
@@ -38,79 +40,83 @@ export function RegistrationView(props) {
 
 
   return (
+    <Router>
+      <Container>
+        <div className="image-container">
+          <img
+            className="registration-view_logo"
+            src={Logo}
+          />
+        </div>
+        <div className="form-container">
+          <Row>
+            <Col>
+              <CardGroup>
+                <Card>
+                  <Card.Body>
+                    <Card.Title>Please Register</Card.Title>
+                    <Form>
+                      <Form.Group>
+                        <Form.Label>Username:</Form.Label>
+                        <Form.Control
+                          type="text"
+                          value={username}
+                          onChange={e => setUsername(e.target.value)}
+                          placeholder="Enter a username"
+                          required />
+                      </Form.Group>
+                      <Form.Group>
+                        <Form.Label>Password:</Form.Label>
+                        <Form.Control
+                          type="password"
+                          value={password}
+                          placeholder="Minimum 8 characters"
+                          onChange={e => setPassword(e.target.value)}
+                          minLength="8"
+                          required />
+                      </Form.Group>
+                      <Form.Group>
+                        <Form.Label>Email:</Form.Label>
+                        <Form.Control
+                          type="email"
+                          value={email}
+                          placeholder="Enter Your email address"
+                          onChange={e => setEmail(e.target.value)}
+                          required />
+                      </Form.Group>
+                      <Form.Group>
+                        <Form.Label>Birthday:</Form.Label>
+                        <Form.Control
+                          type="date"
+                          // pattern="\d{4}[\-]\d{2}[\-]\d{2}"
+                          value={birthday}
+                          onChange={e => setBirthday(e.target.value)}
+                          required />
+                      </Form.Group>
+                      <Button
+                        className="button"
+                        variant="dark"
+                        type="submit"
+                        onClick={handleRegister}>
+                        Submit
+                      </Button>
+                      <Link to={"/"}>
+                        <Button>go to Login</Button>
+                      </Link>
+                    </Form>
+                  </Card.Body>
+                </Card>
+              </CardGroup>
+            </Col>
 
-    <Container>
-      <div className="image-container">
-        <img
-          className="registration-view_logo"
-          src={Logo}
-        />
-      </div>
-      <div className="form-container">
-        <Row>
-          <Col>
-            <CardGroup>
-              <Card>
-                <Card.Body>
-                  <Card.Title>Please Register</Card.Title>
-                  <Form>
-                    <Form.Group>
-                      <Form.Label>Username:</Form.Label>
-                      <Form.Control
-                        type="text"
-                        value={username}
-                        onChange={e => setUsername(e.target.value)}
-                        placeholder="Enter a username"
-                        required />
-                    </Form.Group>
-                    <Form.Group>
-                      <Form.Label>Password:</Form.Label>
-                      <Form.Control
-                        type="password"
-                        value={password}
-                        placeholder="Minimum 8 characters"
-                        onChange={e => setPassword(e.target.value)}
-                        minLength="8"
-                        required />
-                    </Form.Group>
-                    <Form.Group>
-                      <Form.Label>Email:</Form.Label>
-                      <Form.Control
-                        type="email"
-                        value={email}
-                        placeholder="Enter Your email address"
-                        onChange={e => setEmail(e.target.value)}
-                        required />
-                    </Form.Group>
-                    <Form.Group>
-                      <Form.Label>Birthday:</Form.Label>
-                      <Form.Control
-                        type="date"
-                        // pattern="\d{4}[\-]\d{2}[\-]\d{2}"
-                        value={birthday}
-                        onChange={e => setBirthday(e.target.value)}
-                        required />
-                    </Form.Group>
-                    <Button
-                      className="button"
-                      variant="dark"
-                      type="submit"
-                      onClick={handleRegister}>
-                      Submit
-                    </Button>
-                  </Form>
-                </Card.Body>
-              </Card>
-            </CardGroup>
-          </Col>
-
-        </Row>
-      </div>
+          </Row>
+        </div>
 
 
 
 
-    </Container>
+      </Container>
+    </Router>
 
   );
 }
