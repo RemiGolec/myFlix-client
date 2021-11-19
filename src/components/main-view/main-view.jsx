@@ -101,8 +101,11 @@ class MainView extends React.Component {
       <Router>
 
         <NavbarView onLoggedOut={() => this.onLoggedOut()} />
+
+
+
         <Row>
-          {user && <Link to={`/users/${username}`} >logged in as {username}</Link>}
+          {user && <Link to={`/users/${username}`} >logged in as ANYTHING{username}</Link>}
         </Row>
 
         <Row className="main-view justify-content-md-center">
@@ -133,7 +136,7 @@ class MainView extends React.Component {
           }} />
 
 
-          <Route exact path="/movies/:movieId" render={({ match, history}) => {
+          <Route exact path="/movies/:movieId" render={({ match, history }) => {
             if (movies.length === 0) return <div className="main-view" />;
             console.log("movieview_path");
 
