@@ -2,10 +2,11 @@ import React from 'react';
 import './main-view.scss';
 import axios from 'axios';
 import { Container, Row, Col, Navbar, Nav, Button } from 'react-bootstrap';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect, Link } from "react-router-dom";
 
 import { RegistrationView } from '../registration-view/registration-view';
 import { LoginView } from '../login-view/login-view';
+import { ProfileView } from '../profile-view/profile-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { DirectorView } from '../director-view/director-view';
@@ -20,9 +21,18 @@ class MainView extends React.Component {
     super();
     this.state = {
       movies: [],
-      selectedMovie: null,
       user: null
     };
+  }
+
+  componentDidMount() {
+    let accessToken = localStorage.getItem('token');
+    if (accessToken !== null) {
+      this.setState({
+        user: localStorage.getItem('user')
+      });
+      this.getMovies(accessToken);
+    }
   }
 
   getMovies(token) {
@@ -38,16 +48,6 @@ class MainView extends React.Component {
       .catch(function (error) {
         console.log(error);
       });
-  }
-
-  componentDidMount() {
-    let accessToken = localStorage.getItem('token');
-    if (accessToken !== null) {
-      this.setState({
-        user: localStorage.getItem('user')
-      });
-      this.getMovies(accessToken);
-    }
   }
 
   onLoggedIn(authData) {
@@ -84,13 +84,12 @@ class MainView extends React.Component {
   render() {
     console.log("render")
     const { movies, user } = this.state;
-    if (!user) return <RegistrationView onRegistration={user => this.onRegistration(user)} />;
+    // if (!user) return <RegistrationView onRegistration={user => this.onRegistration(user)} />;
     // console.log('should display movies now after successful registration but it isn\'t ');
 
+    // if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
 
 
-    /* Before the movies have been loaded */
-    if (movies.length === 0) return <div className="main-view" />;
 
     return (
 
@@ -121,25 +120,40 @@ class MainView extends React.Component {
             </Navbar.Collapse>
           </Container>
         </Navbar>
+        <Row><Link to={`/users/${user}`} >logged in as {user}</Link></Row>
 
         <Row className="main-view justify-content-md-center">
           <Route exact path="/" render={() => {
-            if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
-
+            // CODE BELOW TO BE ACTIV AFTER ALL VIEWS WORKING
+            if (!user) return <Col>
+              <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
+            </Col>
+            if (movies.length === 0) return <div className="main-view" />;
             console.log("rootpath");
             return movies.map(m => (
-              <Col md={3}>
-                <MovieCard key={m._id} movie={m} />
+              <Col md={3} key={m._id}>
+                <MovieCard movie={m} />
+
               </Col>
             ))
           }} />
 
           <Route exact path="/register" render={() => {
+            if (user) return <Redirect to="/" />
             return <RegistrationView />
           }} />
 
+          <Route path={`/users/${user}`} render={({ history }) => {
+            if (!user) return <Redirect to="/" />
+            return <ProfileView user={user} onBackClick={() => history.goBack()} />
+
+          }} />
+
+
           <Route exact path="/movies/:movieId" render={({ match, history }) => {
+            if (movies.length === 0) return <div className="main-view" />;
             console.log("movieview_path");
+
             return <Col lg={8}>
               <MovieView movie={movies.find(m => m._id === match.params.movieId)}
                 onBackClick={() => history.goBack()} />
