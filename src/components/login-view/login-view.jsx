@@ -7,7 +7,10 @@ import Logo from '../../logo/logo.png';
 import axios from 'axios';
 import { RegistrationView } from '../registration-view/registration-view';
 
-export function LoginView(props) {
+export function LoginView({
+  onLoggedIn,
+  history
+}) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -18,17 +21,22 @@ export function LoginView(props) {
       Username: username,
       Password: password
     })
-      /* then call props.onLoggedIn(username),
+      /* then call onLoggedIn(username),
       which provides the username to our parent component (child to parent communication) */
       .then(response => {
         const data = response.data;
-        props.onLoggedIn(data);
+        console.log('data: ', data);
+        onLoggedIn(data);
       })
       .catch(e => {
         console.log('no such user');
         alert('please enter valid username and password');
       });
   };
+
+  const handleClickRegister = () => {
+    history.push("/register");
+  }
 
 
   return (
@@ -78,7 +86,7 @@ export function LoginView(props) {
                         className="button"
                         variant="dark"
                         type="submit"
-                        onClick={RegistrationView}>
+                        onClick={handleClickRegister}>
                         Register work in progress
                       </Button>
                     </ButtonGroup>

@@ -11,8 +11,7 @@ import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
-
-import Logo from '../../logo/logo.png';
+import NavbarView from '../navbar-view/NavbarView';
 
 
 class MainView extends React.Component {
@@ -23,13 +22,14 @@ class MainView extends React.Component {
       movies: [],
       user: null
     };
+    this.onLoggedOut = this.onLoggedOut.bind(this);
   }
 
   componentDidMount() {
     let accessToken = localStorage.getItem('token');
     if (accessToken !== null) {
       this.setState({
-        user: localStorage.getItem('user')
+        user: JSON.parse(localStorage.getItem('user')),
       });
       this.getMovies(accessToken);
     }
@@ -40,6 +40,7 @@ class MainView extends React.Component {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
+        console.log('movies: ', response.data);
         // Assign the result to the state
         this.setState({
           movies: response.data
@@ -51,13 +52,13 @@ class MainView extends React.Component {
   }
 
   onLoggedIn(authData) {
-    console.log(authData);
+    console.log('authData: ', authData);
     this.setState({
-      user: authData.user.Username,
+      user: authData.user,
     });
 
     localStorage.setItem('token', authData.token);
-    localStorage.setItem('user', authData.user.Username);
+    localStorage.setItem('user', JSON.stringify(authData.user));
     this.getMovies(authData.token);
   }
 
@@ -67,6 +68,7 @@ class MainView extends React.Component {
     this.setState({
       user: null
     });
+    // TODO: Redirect to "/"
   }
 
 
@@ -84,6 +86,9 @@ class MainView extends React.Component {
   render() {
     console.log("render")
     const { movies, user } = this.state;
+    console.log('user: ', user);
+    const username = user !== null ? user.Username : '';
+    console.log('username: ', username);
     // if (!user) return <RegistrationView onRegistration={user => this.onRegistration(user)} />;
     // console.log('should display movies now after successful registration but it isn\'t ');
 
@@ -95,38 +100,16 @@ class MainView extends React.Component {
 
       <Router>
 
-        <Navbar className="navbar"
-          collapseOnSelect
-          expand="lg"
-          variant="dark"
-          sticky="top">
-          <Container>
-            <Navbar.Brand href="#home">
-              <img
-                alt=""
-                src={Logo}
-                height="100"
-                className="d-inline-block align-top"
-              />{''}
-            </Navbar.Brand>
-            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-            <Navbar.Collapse id="responsive-navbar-nav">
-              <Nav className="nav-link">
-                <Nav.Link href="#home" >Home</Nav.Link>
-                <Nav.Link href="#features">Features</Nav.Link>
-                <Nav.Link href="#pricing">Pricing</Nav.Link>
-                <Nav.Link onClick={() => { this.onLoggedOut() }}>Logout</Nav.Link>
-              </Nav>
-            </Navbar.Collapse>
-          </Container>
-        </Navbar>
-        <Row><Link to={`/users/${user}`} >logged in as {user}</Link></Row>
+        <NavbarView onLoggedOut={() => this.onLoggedOut()} />
+        <Row>
+          {user && <Link to={`/users/${username}`} >logged in as {username}</Link>}
+        </Row>
 
         <Row className="main-view justify-content-md-center">
-          <Route exact path="/" render={() => {
+          <Route exact path="/" render={({ history }) => {
             // CODE BELOW TO BE ACTIV AFTER ALL VIEWS WORKING
             if (!user) return <Col>
-              <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
+              <LoginView history={history} onLoggedIn={user => this.onLoggedIn(user)} />
             </Col>
             if (movies.length === 0) return <div className="main-view" />;
             console.log("rootpath");
@@ -138,19 +121,19 @@ class MainView extends React.Component {
             ))
           }} />
 
-          <Route exact path="/register" render={() => {
+          <Route exact path="/register" render={({ history }) => {
             if (user) return <Redirect to="/" />
-            return <RegistrationView />
+            return <RegistrationView history={history} onRegistration={(user) => this.onRegistration(user)} />
           }} />
 
-          <Route path={`/users/${user}`} render={({ history }) => {
+          <Route exact path={`/users/:username`} render={({ history }) => {
             if (!user) return <Redirect to="/" />
             return <ProfileView user={user} onBackClick={() => history.goBack()} />
 
           }} />
 
 
-          <Route exact path="/movies/:movieId" render={({ match, history }) => {
+          <Route exact path="/movies/:movieId" render={({ match, history}) => {
             if (movies.length === 0) return <div className="main-view" />;
             console.log("movieview_path");
 
