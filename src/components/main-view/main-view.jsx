@@ -12,6 +12,7 @@ import { MovieView } from '../movie-view/movie-view';
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
 import NavbarView from '../navbar-view/NavbarView';
+import { ProfileUpdate } from '../profile-update/profile-update';
 
 
 class MainView extends React.Component {
@@ -84,6 +85,7 @@ class MainView extends React.Component {
   }
 
   render() {
+    console.log("what's on")
     console.log("render")
     const { movies, user } = this.state;
     console.log('user: ', user);
@@ -101,11 +103,8 @@ class MainView extends React.Component {
       <Router>
 
         <NavbarView onLoggedOut={() => this.onLoggedOut()} />
-
-
-
         <Row>
-          {user && <Link to={`/users/${username}`} >logged in as ANYTHING{username}</Link>}
+          {user && <Link to={`/users/${username}`} >logged in as {username}</Link>}
         </Row>
 
         <Row className="main-view justify-content-md-center">
@@ -133,6 +132,11 @@ class MainView extends React.Component {
             if (!user) return <Redirect to="/" />
             return <ProfileView user={user} onBackClick={() => history.goBack()} />
 
+          }} />
+
+          <Route exact path={`users/profile_update`} render={({ history }) => {
+            if (!user) return <Redirect to="/" />
+            return <ProfileUpdate user={user} onBackClick={() => history.goBack()} />
           }} />
 
 
