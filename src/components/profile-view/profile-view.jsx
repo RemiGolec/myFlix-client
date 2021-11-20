@@ -26,7 +26,7 @@ export class ProfileView extends React.Component {
                                 Back something
                             </Button>
 
-                            <Link to={`/users/profile_update`} >
+                            <Link to={`/profile_update`} >
                                 <Button>Update Profile</Button>
                             </Link>
 

@@ -5,7 +5,6 @@ import { Form, Button, Container, Card, Col, Row, ButtonGroup, ButtonToolbar } f
 
 import Logo from '../../logo/logo.png';
 import axios from 'axios';
-import { RegistrationView } from '../registration-view/registration-view';
 
 export function LoginView({
   onLoggedIn,
