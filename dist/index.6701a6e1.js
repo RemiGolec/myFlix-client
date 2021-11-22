@@ -40229,7 +40229,7 @@ class ProfileView extends _reactDefault.default.Component {
                                 children: "Back something"
                             }),
                             /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
-                                to: `/profile_update`,
+                                to: `/profile-update`,
                                 __source: {
                                     fileName: "src/components/profile-view/profile-view.jsx",
                                     lineNumber: 29
