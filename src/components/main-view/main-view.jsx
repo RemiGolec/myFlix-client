@@ -134,7 +134,7 @@ class MainView extends React.Component {
 
           }} />
 
-          <Route exact path={`/profile_update`} render={({ history }) => {
+          <Route exact path={`/users/:username/profile-update`} render={({ history }) => {
             if (!user) return <Redirect to="/" />
             return <ProfileUpdate user={user} onBackClick={() => history.goBack()} />
           }} />

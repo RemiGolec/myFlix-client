@@ -22943,7 +22943,7 @@ class MainView extends _reactDefault.default.Component {
                         }),
                         /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Route, {
                             exact: true,
-                            path: `/profile_update`,
+                            path: `/users/:username/profile-update`,
                             render: ({ history  })=>{
                                 if (!user) return(/*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Redirect, {
                                     to: "/"
@@ -41062,16 +41062,13 @@ function ProfileUpdate(props) {
                                                     },
                                                     __self: this,
                                                     children: [
-                                                        /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form.Label, {
+                                                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                                             __source: {
                                                                 fileName: "src/components/profile-update/profile-update.jsx",
                                                                 lineNumber: 57
                                                             },
                                                             __self: this,
-                                                            children: [
-                                                                "Username:Profile Name:",
-                                                                user.Username
-                                                            ]
+                                                            children: "Username:"
                                                         }),
                                                         /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Control, {
                                                             type: "text",

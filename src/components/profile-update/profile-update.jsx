@@ -54,7 +54,7 @@ export function ProfileUpdate(props) {
                                         <Card.Title>Update User</Card.Title>
                                         <Form>
                                             <Form.Group>
-                                                <Form.Label>Username:Profile Name:{user.Username}</Form.Label>
+                                                <Form.Label>Username:</Form.Label>
                                                 <Form.Control
                                                     type="text"
                                                     value={username}
