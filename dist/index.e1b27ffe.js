@@ -22771,6 +22771,7 @@ var _directorView = require("../director-view/director-view");
 var _genreView = require("../genre-view/genre-view");
 var _navbarView = require("../navbar-view/NavbarView");
 var _navbarViewDefault = parcelHelpers.interopDefault(_navbarView);
+var _profileUpdate = require("../profile-update/profile-update");
 class MainView extends _reactDefault.default.Component {
     constructor(){
         super();
@@ -22784,7 +22785,8 @@ class MainView extends _reactDefault.default.Component {
         let accessToken = localStorage.getItem('token');
         if (accessToken !== null) {
             this.setState({
-                user: JSON.parse(localStorage.getItem('user'))
+                // user is the Username string
+                user: localStorage.getItem('user')
             });
             this.getMovies(accessToken);
         }
@@ -22807,10 +22809,10 @@ class MainView extends _reactDefault.default.Component {
     onLoggedIn(authData) {
         console.log('authData: ', authData);
         this.setState({
-            user: authData.user
+            user: authData.user.Username
         });
         localStorage.setItem('token', authData.token);
-        localStorage.setItem('user', JSON.stringify(authData.user));
+        localStorage.setItem('user', authData.user.Username);
         this.getMovies(authData.token);
     }
     onLoggedOut() {
@@ -22829,18 +22831,17 @@ class MainView extends _reactDefault.default.Component {
         });
     }
     render() {
+        console.log("what's on");
         console.log("render");
         const { movies , user: user1  } = this.state;
         console.log('user: ', user1);
-        const username = user1 !== null ? user1.Username : '';
-        console.log('username: ', username);
         // if (!user) return <RegistrationView onRegistration={user => this.onRegistration(user)} />;
         // console.log('should display movies now after successful registration but it isn\'t ');
         // if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
         return(/*#__PURE__*/ _jsxRuntime.jsxs(_reactRouterDom.BrowserRouter, {
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 101,
+                lineNumber: 102,
                 columnNumber: 7
             },
             __self: this,
@@ -22850,7 +22851,7 @@ class MainView extends _reactDefault.default.Component {
                     ,
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 103,
+                        lineNumber: 104,
                         columnNumber: 9
                     },
                     __self: this
@@ -22858,21 +22859,21 @@ class MainView extends _reactDefault.default.Component {
                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 104,
+                        lineNumber: 105,
                         columnNumber: 9
                     },
                     __self: this,
                     children: user1 && /*#__PURE__*/ _jsxRuntime.jsxs(_reactRouterDom.Link, {
-                        to: `/users/${username}`,
+                        to: `/users/${user1}`,
                         __source: {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 105,
+                            lineNumber: 106,
                             columnNumber: 20
                         },
                         __self: this,
                         children: [
                             "logged in as ",
-                            username
+                            user1
                         ]
                     })
                 }),
@@ -22880,7 +22881,7 @@ class MainView extends _reactDefault.default.Component {
                     className: "main-view justify-content-md-center",
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 108,
+                        lineNumber: 109,
                         columnNumber: 9
                     },
                     __self: this,
@@ -22910,7 +22911,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 109,
+                                lineNumber: 110,
                                 columnNumber: 11
                             },
                             __self: this
@@ -22929,7 +22930,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 124,
+                                lineNumber: 125,
                                 columnNumber: 11
                             },
                             __self: this
@@ -22948,7 +22949,26 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 129,
+                                lineNumber: 130,
+                                columnNumber: 11
+                            },
+                            __self: this
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Route, {
+                            exact: true,
+                            path: `/users/:username/profile-update`,
+                            render: ({ history  })=>{
+                                if (!user1) return(/*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Redirect, {
+                                    to: "/"
+                                }));
+                                return(/*#__PURE__*/ _jsxRuntime.jsx(_profileUpdate.ProfileUpdate, {
+                                    user: user1,
+                                    onBackClick: ()=>history.goBack()
+                                }));
+                            },
+                            __source: {
+                                fileName: "src/components/main-view/main-view.jsx",
+                                lineNumber: 136,
                                 columnNumber: 11
                             },
                             __self: this
@@ -22972,7 +22992,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 136,
+                                lineNumber: 142,
                                 columnNumber: 11
                             },
                             __self: this
@@ -22995,7 +23015,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 146,
+                                lineNumber: 152,
                                 columnNumber: 11
                             },
                             __self: this
@@ -23018,7 +23038,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 154,
+                                lineNumber: 160,
                                 columnNumber: 11
                             },
                             __self: this
@@ -23036,7 +23056,7 @@ exports.default = MainView;
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"6Ds2u","react":"4mchR","./main-view.scss":"hRkrD","axios":"1IeuP","react-bootstrap":"9qMdX","react-router-dom":"etVME","../registration-view/registration-view":"lGbHG","../login-view/login-view":"7IGV8","../profile-view/profile-view":"aZt7f","../movie-card/movie-card":"04zIX","../movie-view/movie-view":"8S478","../director-view/director-view":"47DIu","../genre-view/genre-view":"eGJ1e","@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9pz13","../navbar-view/NavbarView":"bhCxH"}],"hRkrD":[function() {},{}],"1IeuP":[function(require,module,exports) {
+},{"react/jsx-runtime":"6Ds2u","react":"4mchR","./main-view.scss":"hRkrD","axios":"1IeuP","react-bootstrap":"9qMdX","react-router-dom":"etVME","../registration-view/registration-view":"lGbHG","../login-view/login-view":"7IGV8","../profile-view/profile-view":"aZt7f","../movie-card/movie-card":"04zIX","../movie-view/movie-view":"8S478","../director-view/director-view":"47DIu","../genre-view/genre-view":"eGJ1e","@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9pz13","../navbar-view/NavbarView":"bhCxH","../profile-update/profile-update":"7Y55X"}],"hRkrD":[function() {},{}],"1IeuP":[function(require,module,exports) {
 module.exports = require('./lib/axios');
 
 },{"./lib/axios":"ePOwX"}],"ePOwX":[function(require,module,exports) {
@@ -39969,7 +39989,6 @@ var _logoPng = require("../../logo/logo.png");
 var _logoPngDefault = parcelHelpers.interopDefault(_logoPng);
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
-var _registrationView = require("../registration-view/registration-view");
 var _s = $RefreshSig$();
 function LoginView({ onLoggedIn , history  }) {
     _s();
@@ -39996,7 +40015,7 @@ function LoginView({ onLoggedIn , history  }) {
     return(/*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Container, {
         __source: {
             fileName: "src/components/login-view/login-view.jsx",
-            lineNumber: 43,
+            lineNumber: 42,
             columnNumber: 5
         },
         __self: this,
@@ -40005,7 +40024,7 @@ function LoginView({ onLoggedIn , history  }) {
                 className: "image-container",
                 __source: {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 44,
+                    lineNumber: 43,
                     columnNumber: 7
                 },
                 __self: this,
@@ -40014,7 +40033,7 @@ function LoginView({ onLoggedIn , history  }) {
                     src: _logoPngDefault.default,
                     __source: {
                         fileName: "src/components/login-view/login-view.jsx",
-                        lineNumber: 45,
+                        lineNumber: 44,
                         columnNumber: 9
                     },
                     __self: this
@@ -40024,35 +40043,35 @@ function LoginView({ onLoggedIn , history  }) {
                 className: "form-container",
                 __source: {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 50,
+                    lineNumber: 49,
                     columnNumber: 7
                 },
                 __self: this,
                 children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
                     __source: {
                         fileName: "src/components/login-view/login-view.jsx",
-                        lineNumber: 51,
+                        lineNumber: 50,
                         columnNumber: 9
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
                         __source: {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 52,
+                            lineNumber: 51,
                             columnNumber: 11
                         },
                         __self: this,
                         children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card, {
                             __source: {
                                 fileName: "src/components/login-view/login-view.jsx",
-                                lineNumber: 53,
+                                lineNumber: 52,
                                 columnNumber: 13
                             },
                             __self: this,
                             children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Body, {
                                 __source: {
                                     fileName: "src/components/login-view/login-view.jsx",
-                                    lineNumber: 54,
+                                    lineNumber: 53,
                                     columnNumber: 15
                                 },
                                 __self: this,
@@ -40060,7 +40079,7 @@ function LoginView({ onLoggedIn , history  }) {
                                     /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card.Title, {
                                         __source: {
                                             fileName: "src/components/login-view/login-view.jsx",
-                                            lineNumber: 55,
+                                            lineNumber: 54,
                                             columnNumber: 17
                                         },
                                         __self: this,
@@ -40069,7 +40088,7 @@ function LoginView({ onLoggedIn , history  }) {
                                     /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form, {
                                         __source: {
                                             fileName: "src/components/login-view/login-view.jsx",
-                                            lineNumber: 56,
+                                            lineNumber: 55,
                                             columnNumber: 17
                                         },
                                         __self: this,
@@ -40078,7 +40097,7 @@ function LoginView({ onLoggedIn , history  }) {
                                                 controlId: "formUsername",
                                                 __source: {
                                                     fileName: "src/components/login-view/login-view.jsx",
-                                                    lineNumber: 57,
+                                                    lineNumber: 56,
                                                     columnNumber: 19
                                                 },
                                                 __self: this,
@@ -40086,7 +40105,7 @@ function LoginView({ onLoggedIn , history  }) {
                                                     /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                                         __source: {
                                                             fileName: "src/components/login-view/login-view.jsx",
-                                                            lineNumber: 58,
+                                                            lineNumber: 57,
                                                             columnNumber: 21
                                                         },
                                                         __self: this,
@@ -40100,7 +40119,7 @@ function LoginView({ onLoggedIn , history  }) {
                                                         required: true,
                                                         __source: {
                                                             fileName: "src/components/login-view/login-view.jsx",
-                                                            lineNumber: 59,
+                                                            lineNumber: 58,
                                                             columnNumber: 21
                                                         },
                                                         __self: this
@@ -40111,7 +40130,7 @@ function LoginView({ onLoggedIn , history  }) {
                                                 controlId: "formPassword",
                                                 __source: {
                                                     fileName: "src/components/login-view/login-view.jsx",
-                                                    lineNumber: 66,
+                                                    lineNumber: 65,
                                                     columnNumber: 19
                                                 },
                                                 __self: this,
@@ -40119,7 +40138,7 @@ function LoginView({ onLoggedIn , history  }) {
                                                     /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                                         __source: {
                                                             fileName: "src/components/login-view/login-view.jsx",
-                                                            lineNumber: 67,
+                                                            lineNumber: 66,
                                                             columnNumber: 21
                                                         },
                                                         __self: this,
@@ -40133,7 +40152,7 @@ function LoginView({ onLoggedIn , history  }) {
                                                         required: true,
                                                         __source: {
                                                             fileName: "src/components/login-view/login-view.jsx",
-                                                            lineNumber: 68,
+                                                            lineNumber: 67,
                                                             columnNumber: 21
                                                         },
                                                         __self: this
@@ -40143,7 +40162,7 @@ function LoginView({ onLoggedIn , history  }) {
                                             /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.ButtonToolbar, {
                                                 __source: {
                                                     fileName: "src/components/login-view/login-view.jsx",
-                                                    lineNumber: 74,
+                                                    lineNumber: 73,
                                                     columnNumber: 19
                                                 },
                                                 __self: this,
@@ -40152,7 +40171,7 @@ function LoginView({ onLoggedIn , history  }) {
                                                         className: "me-5",
                                                         __source: {
                                                             fileName: "src/components/login-view/login-view.jsx",
-                                                            lineNumber: 75,
+                                                            lineNumber: 74,
                                                             columnNumber: 21
                                                         },
                                                         __self: this,
@@ -40163,7 +40182,7 @@ function LoginView({ onLoggedIn , history  }) {
                                                             onClick: handleSubmit,
                                                             __source: {
                                                                 fileName: "src/components/login-view/login-view.jsx",
-                                                                lineNumber: 76,
+                                                                lineNumber: 75,
                                                                 columnNumber: 23
                                                             },
                                                             __self: this,
@@ -40173,7 +40192,7 @@ function LoginView({ onLoggedIn , history  }) {
                                                     /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.ButtonGroup, {
                                                         __source: {
                                                             fileName: "src/components/login-view/login-view.jsx",
-                                                            lineNumber: 84,
+                                                            lineNumber: 83,
                                                             columnNumber: 21
                                                         },
                                                         __self: this,
@@ -40184,7 +40203,7 @@ function LoginView({ onLoggedIn , history  }) {
                                                             onClick: handleClickRegister,
                                                             __source: {
                                                                 fileName: "src/components/login-view/login-view.jsx",
-                                                                lineNumber: 85,
+                                                                lineNumber: 84,
                                                                 columnNumber: 23
                                                             },
                                                             __self: this,
@@ -40221,7 +40240,7 @@ $RefreshReg$(_c, "LoginView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"6Ds2u","react":"4mchR","prop-types":"2bysO","react-bootstrap":"9qMdX","../../logo/logo.png":"lvccL","axios":"1IeuP","../registration-view/registration-view":"lGbHG","@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9pz13"}],"aZt7f":[function(require,module,exports) {
+},{"react/jsx-runtime":"6Ds2u","react":"4mchR","prop-types":"2bysO","react-bootstrap":"9qMdX","../../logo/logo.png":"lvccL","axios":"1IeuP","@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9pz13"}],"aZt7f":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$80e7 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -40238,99 +40257,108 @@ var _reactDefault = parcelHelpers.interopDefault(_react);
 var _reactBootstrap = require("react-bootstrap");
 var _propTypes = require("prop-types");
 var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
-class ProfileView extends _reactDefault.default.Component {
-    render() {
-        console.log('this.props: ', this.props);
-        const { user , onBackClick  } = this.props;
-        return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card, {
+var _reactRouterDom = require("react-router-dom");
+function ProfileView(props) {
+    console.log('props: ', props);
+    /**
+     * TODO
+     * - Step1: create a userData variable using setState. Example of this is in the RegistrationView. The default should be null
+     * - Step2: Create a function called `getUserData`.
+     * - Step3: In getUSerData, make an axios GET request to get the user by username. The username to use is in the props.
+     *    - An example of the GET request: Take a look at the getMovies function
+     *    - The API url to get a user by username: Take a look at your postman or the server
+     * - Step4: When you get the data back from the server in the `.then` function, use setState to store the user information in state of this component
+     * - Step5: finally display the user information stored in state in the card below
+     */ return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card, {
+        __source: {
+            fileName: "src/components/profile-view/profile-view.jsx",
+            lineNumber: 22,
+            columnNumber: 7
+        },
+        __self: this,
+        children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Body, {
             __source: {
                 fileName: "src/components/profile-view/profile-view.jsx",
-                lineNumber: 13,
-                columnNumber: 13
+                lineNumber: 23,
+                columnNumber: 11
             },
             __self: this,
-            children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Body, {
-                __source: {
-                    fileName: "src/components/profile-view/profile-view.jsx",
-                    lineNumber: 14,
-                    columnNumber: 17
-                },
-                __self: this,
-                children: [
-                    user && /*#__PURE__*/ _jsxRuntime.jsxs(_jsxRuntime.Fragment, {
-                        children: [
-                            /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Title, {
-                                __source: {
-                                    fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 17,
-                                    columnNumber: 25
-                                },
-                                __self: this,
-                                children: [
-                                    "Profile Name:",
-                                    user.Username
-                                ]
-                            }),
-                            /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Text, {
-                                __source: {
-                                    fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 18,
-                                    columnNumber: 25
-                                },
-                                __self: this,
-                                children: [
-                                    "Email:",
-                                    user.Email
-                                ]
-                            }),
-                            /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Text, {
-                                __source: {
-                                    fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 19,
-                                    columnNumber: 25
-                                },
-                                __self: this,
-                                children: [
-                                    "Date 0f Birth: ",
-                                    user.Birthday
-                                ]
-                            }),
-                            /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
-                                variant: "dark",
-                                onClick: ()=>{
-                                    onBackClick();
-                                },
-                                __source: {
-                                    fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 20,
-                                    columnNumber: 25
-                                },
-                                __self: this,
-                                children: "Back"
-                            })
-                        ]
-                    }),
-                    !user && /*#__PURE__*/ _jsxRuntime.jsx("p", {
+            children: [
+                /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Title, {
+                    __source: {
+                        fileName: "src/components/profile-view/profile-view.jsx",
+                        lineNumber: 24,
+                        columnNumber: 15
+                    },
+                    __self: this,
+                    children: [
+                        "Profile Name:",
+                        userData.Username
+                    ]
+                }),
+                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card.Text, {
+                    __source: {
+                        fileName: "src/components/profile-view/profile-view.jsx",
+                        lineNumber: 25,
+                        columnNumber: 15
+                    },
+                    __self: this,
+                    children: "Email:"
+                }),
+                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card.Text, {
+                    __source: {
+                        fileName: "src/components/profile-view/profile-view.jsx",
+                        lineNumber: 26,
+                        columnNumber: 15
+                    },
+                    __self: this,
+                    children: "Date 0f Birth:"
+                }),
+                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
+                    variant: "dark",
+                    onClick: ()=>{
+                        onBackClick();
+                    },
+                    __source: {
+                        fileName: "src/components/profile-view/profile-view.jsx",
+                        lineNumber: 27,
+                        columnNumber: 15
+                    },
+                    __self: this,
+                    children: "Back something"
+                }),
+                /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
+                    to: `/profile-update`,
+                    __source: {
+                        fileName: "src/components/profile-view/profile-view.jsx",
+                        lineNumber: 34,
+                        columnNumber: 15
+                    },
+                    __self: this,
+                    children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 28,
-                            columnNumber: 31
+                            lineNumber: 35,
+                            columnNumber: 19
                         },
                         __self: this,
-                        children: "Loading..."
+                        children: "Update Profile"
                     })
-                ]
-            })
-        }));
-    }
+                })
+            ]
+        })
+    }));
 }
+_c = ProfileView;
+var _c;
+$RefreshReg$(_c, "ProfileView");
 
   $parcel$ReactRefreshHelpers$80e7.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"6Ds2u","react":"4mchR","react-bootstrap":"9qMdX","prop-types":"2bysO","@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9pz13"}],"04zIX":[function(require,module,exports) {
+},{"react/jsx-runtime":"6Ds2u","react":"4mchR","react-bootstrap":"9qMdX","prop-types":"2bysO","react-router-dom":"etVME","@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9pz13"}],"04zIX":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$6989 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -40349,14 +40377,36 @@ var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 var _reactBootstrap = require("react-bootstrap");
 var _reactRouterDom = require("react-router-dom");
 var _movieCardScss = require("./movie-card.scss");
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
 class MovieCard extends _reactDefault.default.Component {
     render() {
-        const { movie  } = this.props;
+        const { movie , user  } = this.props;
+        // const { user } = this.Username;
+        const handleAddToFavourites = (e)=>{
+            e.preventDefault();
+            console.log('wish this was working');
+            /* Send a request to the server for authentication */ _axiosDefault.default.put('https://morning-badlands-52426.herokuapp.com/users/', {
+                Username: {
+                    user: Username
+                },
+                FavouriteMovies: this.movie
+            })/* then call props.onRegistration(username) */ .then((response)=>{
+                const data = response.data;
+                console.log(data);
+                alert("movie added to favourites");
+                // props.onRegistration(data);
+                props.history.push("/");
+            }).catch((e)=>{
+                console.log('error adding movie to favourites');
+                alert('movie NOT added to favourites');
+            });
+        };
         return(/*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card, {
             className: "bg-transparent movie_card_background",
             __source: {
                 fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 12,
+                lineNumber: 37,
                 columnNumber: 7
             },
             __self: this,
@@ -40365,7 +40415,7 @@ class MovieCard extends _reactDefault.default.Component {
                     className: "bg-dark text-white movie_card",
                     __source: {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 13,
+                        lineNumber: 38,
                         columnNumber: 9
                     },
                     __self: this,
@@ -40378,7 +40428,7 @@ class MovieCard extends _reactDefault.default.Component {
                             className: "card_image",
                             __source: {
                                 fileName: "src/components/movie-card/movie-card.jsx",
-                                lineNumber: 16,
+                                lineNumber: 41,
                                 columnNumber: 11
                             },
                             __self: this
@@ -40387,7 +40437,7 @@ class MovieCard extends _reactDefault.default.Component {
                             className: "image-overlay",
                             __source: {
                                 fileName: "src/components/movie-card/movie-card.jsx",
-                                lineNumber: 22,
+                                lineNumber: 47,
                                 columnNumber: 11
                             },
                             __self: this,
@@ -40395,7 +40445,7 @@ class MovieCard extends _reactDefault.default.Component {
                                 className: "card-title_image-overlay",
                                 __source: {
                                     fileName: "src/components/movie-card/movie-card.jsx",
-                                    lineNumber: 23,
+                                    lineNumber: 48,
                                     columnNumber: 13
                                 },
                                 __self: this,
@@ -40408,7 +40458,7 @@ class MovieCard extends _reactDefault.default.Component {
                     to: `/movies/${movie._id}`,
                     __source: {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 26,
+                        lineNumber: 51,
                         columnNumber: 9
                     },
                     __self: this,
@@ -40416,7 +40466,7 @@ class MovieCard extends _reactDefault.default.Component {
                         variant: "link",
                         __source: {
                             fileName: "src/components/movie-card/movie-card.jsx",
-                            lineNumber: 27,
+                            lineNumber: 52,
                             columnNumber: 11
                         },
                         __self: this,
@@ -40427,7 +40477,7 @@ class MovieCard extends _reactDefault.default.Component {
                     to: `/directors/${movie.Director.Name}`,
                     __source: {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 29,
+                        lineNumber: 54,
                         columnNumber: 9
                     },
                     __self: this,
@@ -40435,7 +40485,7 @@ class MovieCard extends _reactDefault.default.Component {
                         variant: "link",
                         __source: {
                             fileName: "src/components/movie-card/movie-card.jsx",
-                            lineNumber: 30,
+                            lineNumber: 55,
                             columnNumber: 11
                         },
                         __self: this,
@@ -40446,7 +40496,7 @@ class MovieCard extends _reactDefault.default.Component {
                     to: `/genres/${movie.Genre.Name}`,
                     __source: {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 32,
+                        lineNumber: 57,
                         columnNumber: 9
                     },
                     __self: this,
@@ -40454,12 +40504,25 @@ class MovieCard extends _reactDefault.default.Component {
                         variant: "link",
                         __source: {
                             fileName: "src/components/movie-card/movie-card.jsx",
-                            lineNumber: 33,
+                            lineNumber: 58,
                             columnNumber: 11
                         },
                         __self: this,
                         children: "Genre"
                     })
+                }),
+                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
+                    className: "button",
+                    variant: "dark",
+                    type: "submit",
+                    onClick: handleAddToFavourites,
+                    __source: {
+                        fileName: "src/components/movie-card/movie-card.jsx",
+                        lineNumber: 60,
+                        columnNumber: 9
+                    },
+                    __self: this,
+                    children: "Add to favourites"
                 })
             ]
         }));
@@ -40487,7 +40550,7 @@ MovieCard.propTypes = {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"6Ds2u","react":"4mchR","prop-types":"2bysO","react-bootstrap":"9qMdX","react-router-dom":"etVME","./movie-card.scss":"8rKa8","@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9pz13"}],"8rKa8":[function() {},{}],"8S478":[function(require,module,exports) {
+},{"react/jsx-runtime":"6Ds2u","react":"4mchR","prop-types":"2bysO","react-bootstrap":"9qMdX","react-router-dom":"etVME","./movie-card.scss":"8rKa8","@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9pz13","axios":"1IeuP"}],"8rKa8":[function() {},{}],"8S478":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$4e70 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -41026,6 +41089,316 @@ $RefreshReg$(_c, "NavbarView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"6Ds2u","react":"4mchR","react-bootstrap":"9qMdX","@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9pz13","../../logo/logo.png":"lvccL"}],"hlAnh":[function() {},{}]},["emU3S","90ZSn","dB8et"], "dB8et", "parcelRequireaec4")
+},{"react/jsx-runtime":"6Ds2u","react":"4mchR","react-bootstrap":"9qMdX","@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9pz13","../../logo/logo.png":"lvccL"}],"7Y55X":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$fa55 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$fa55.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ProfileUpdate", ()=>ProfileUpdate
+);
+var _jsxRuntime = require("react/jsx-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _reactBootstrap = require("react-bootstrap");
+var _reactRouterDom = require("react-router-dom");
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+var _propTypes = require("prop-types");
+var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
+var _s = $RefreshSig$();
+function ProfileUpdate(props) {
+    _s();
+    console.log("props: ", props);
+    const [username, setUsername] = _react.useState('');
+    const [password, setPassword] = _react.useState('');
+    const [email, setEmail] = _react.useState('');
+    const [birthday, setBirthday] = _react.useState('');
+    const handleUpdateUser = (e)=>{
+        e.preventDefault();
+        /* Send a request to the server for authentication */ _axiosDefault.default.put('https://morning-badlands-52426.herokuapp.com/users', {
+            Username: username,
+            Password: password,
+            Email: email,
+            Birthday: birthday
+        })/* then call props.onRegistration(username) */ .then((response)=>{
+            const data = response.data;
+            console.log(data);
+            alert("user updated");
+            // props.onRegistration(data);
+            props.history.push("/");
+        }).catch((e)=>{
+            console.log('wrong format or incomplete data');
+            alert('fill in all the fields in correct format');
+        });
+    };
+    return(/*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.BrowserRouter, {
+        __source: {
+            fileName: "src/components/profile-update/profile-update.jsx",
+            lineNumber: 46,
+            columnNumber: 9
+        },
+        __self: this,
+        children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Container, {
+            __source: {
+                fileName: "src/components/profile-update/profile-update.jsx",
+                lineNumber: 47,
+                columnNumber: 13
+            },
+            __self: this,
+            children: /*#__PURE__*/ _jsxRuntime.jsx("div", {
+                className: "form-container",
+                __source: {
+                    fileName: "src/components/profile-update/profile-update.jsx",
+                    lineNumber: 48,
+                    columnNumber: 17
+                },
+                __self: this,
+                children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
+                    __source: {
+                        fileName: "src/components/profile-update/profile-update.jsx",
+                        lineNumber: 49,
+                        columnNumber: 21
+                    },
+                    __self: this,
+                    children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
+                        __source: {
+                            fileName: "src/components/profile-update/profile-update.jsx",
+                            lineNumber: 50,
+                            columnNumber: 25
+                        },
+                        __self: this,
+                        children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.CardGroup, {
+                            __source: {
+                                fileName: "src/components/profile-update/profile-update.jsx",
+                                lineNumber: 51,
+                                columnNumber: 29
+                            },
+                            __self: this,
+                            children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card, {
+                                __source: {
+                                    fileName: "src/components/profile-update/profile-update.jsx",
+                                    lineNumber: 52,
+                                    columnNumber: 33
+                                },
+                                __self: this,
+                                children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Body, {
+                                    __source: {
+                                        fileName: "src/components/profile-update/profile-update.jsx",
+                                        lineNumber: 53,
+                                        columnNumber: 37
+                                    },
+                                    __self: this,
+                                    children: [
+                                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card.Title, {
+                                            __source: {
+                                                fileName: "src/components/profile-update/profile-update.jsx",
+                                                lineNumber: 54,
+                                                columnNumber: 41
+                                            },
+                                            __self: this,
+                                            children: "Update User"
+                                        }),
+                                        /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form, {
+                                            __source: {
+                                                fileName: "src/components/profile-update/profile-update.jsx",
+                                                lineNumber: 55,
+                                                columnNumber: 41
+                                            },
+                                            __self: this,
+                                            children: [
+                                                /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form.Group, {
+                                                    __source: {
+                                                        fileName: "src/components/profile-update/profile-update.jsx",
+                                                        lineNumber: 56,
+                                                        columnNumber: 45
+                                                    },
+                                                    __self: this,
+                                                    children: [
+                                                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
+                                                            __source: {
+                                                                fileName: "src/components/profile-update/profile-update.jsx",
+                                                                lineNumber: 57,
+                                                                columnNumber: 49
+                                                            },
+                                                            __self: this,
+                                                            children: "Username:"
+                                                        }),
+                                                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Control, {
+                                                            type: "text",
+                                                            value: username,
+                                                            onChange: (e)=>setUsername(e.target.value)
+                                                            ,
+                                                            placeholder: "Enter a username",
+                                                            required: true,
+                                                            __source: {
+                                                                fileName: "src/components/profile-update/profile-update.jsx",
+                                                                lineNumber: 58,
+                                                                columnNumber: 49
+                                                            },
+                                                            __self: this
+                                                        })
+                                                    ]
+                                                }),
+                                                /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form.Group, {
+                                                    __source: {
+                                                        fileName: "src/components/profile-update/profile-update.jsx",
+                                                        lineNumber: 65,
+                                                        columnNumber: 45
+                                                    },
+                                                    __self: this,
+                                                    children: [
+                                                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
+                                                            __source: {
+                                                                fileName: "src/components/profile-update/profile-update.jsx",
+                                                                lineNumber: 66,
+                                                                columnNumber: 49
+                                                            },
+                                                            __self: this,
+                                                            children: "Password:"
+                                                        }),
+                                                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Control, {
+                                                            type: "password",
+                                                            value: password,
+                                                            placeholder: "Minimum 8 characters",
+                                                            onChange: (e)=>setPassword(e.target.value)
+                                                            ,
+                                                            minLength: "8",
+                                                            required: true,
+                                                            __source: {
+                                                                fileName: "src/components/profile-update/profile-update.jsx",
+                                                                lineNumber: 67,
+                                                                columnNumber: 49
+                                                            },
+                                                            __self: this
+                                                        })
+                                                    ]
+                                                }),
+                                                /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form.Group, {
+                                                    __source: {
+                                                        fileName: "src/components/profile-update/profile-update.jsx",
+                                                        lineNumber: 75,
+                                                        columnNumber: 45
+                                                    },
+                                                    __self: this,
+                                                    children: [
+                                                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
+                                                            __source: {
+                                                                fileName: "src/components/profile-update/profile-update.jsx",
+                                                                lineNumber: 76,
+                                                                columnNumber: 49
+                                                            },
+                                                            __self: this,
+                                                            children: "Email:"
+                                                        }),
+                                                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Control, {
+                                                            type: "email",
+                                                            value: email,
+                                                            placeholder: "Enter Your email address",
+                                                            onChange: (e)=>setEmail(e.target.value)
+                                                            ,
+                                                            required: true,
+                                                            __source: {
+                                                                fileName: "src/components/profile-update/profile-update.jsx",
+                                                                lineNumber: 77,
+                                                                columnNumber: 49
+                                                            },
+                                                            __self: this
+                                                        })
+                                                    ]
+                                                }),
+                                                /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form.Group, {
+                                                    __source: {
+                                                        fileName: "src/components/profile-update/profile-update.jsx",
+                                                        lineNumber: 84,
+                                                        columnNumber: 45
+                                                    },
+                                                    __self: this,
+                                                    children: [
+                                                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
+                                                            __source: {
+                                                                fileName: "src/components/profile-update/profile-update.jsx",
+                                                                lineNumber: 85,
+                                                                columnNumber: 49
+                                                            },
+                                                            __self: this,
+                                                            children: "Birthday:"
+                                                        }),
+                                                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Control, {
+                                                            type: "date",
+                                                            // pattern="\d{4}[\-]\d{2}[\-]\d{2}"
+                                                            value: birthday,
+                                                            onChange: (e)=>setBirthday(e.target.value)
+                                                            ,
+                                                            required: true,
+                                                            __source: {
+                                                                fileName: "src/components/profile-update/profile-update.jsx",
+                                                                lineNumber: 86,
+                                                                columnNumber: 49
+                                                            },
+                                                            __self: this
+                                                        })
+                                                    ]
+                                                }),
+                                                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
+                                                    className: "button",
+                                                    variant: "dark",
+                                                    type: "submit",
+                                                    onClick: handleUpdateUser,
+                                                    __source: {
+                                                        fileName: "src/components/profile-update/profile-update.jsx",
+                                                        lineNumber: 93,
+                                                        columnNumber: 45
+                                                    },
+                                                    __self: this,
+                                                    children: "Update"
+                                                }),
+                                                /*#__PURE__*/ _jsxRuntime.jsx("br", {
+                                                    __source: {
+                                                        fileName: "src/components/profile-update/profile-update.jsx",
+                                                        lineNumber: 100,
+                                                        columnNumber: 45
+                                                    },
+                                                    __self: this
+                                                }),
+                                                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
+                                                    className: "button",
+                                                    variant: "dark",
+                                                    onClick: ()=>props.history.push("/")
+                                                    ,
+                                                    __source: {
+                                                        fileName: "src/components/profile-update/profile-update.jsx",
+                                                        lineNumber: 101,
+                                                        columnNumber: 45
+                                                    },
+                                                    __self: this,
+                                                    children: "go to Login"
+                                                })
+                                            ]
+                                        })
+                                    ]
+                                })
+                            })
+                        })
+                    })
+                })
+            })
+        })
+    }));
+}
+_s(ProfileUpdate, "tdA1KK8yaZidqYo0wscqshHt/KE=");
+_c = ProfileUpdate;
+var _c;
+$RefreshReg$(_c, "ProfileUpdate");
+
+  $parcel$ReactRefreshHelpers$fa55.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-runtime":"6Ds2u","react":"4mchR","react-bootstrap":"9qMdX","react-router-dom":"etVME","axios":"1IeuP","prop-types":"2bysO","@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"9pz13"}],"hlAnh":[function() {},{}]},["emU3S","90ZSn","dB8et"], "dB8et", "parcelRequireaec4")
 
 //# sourceMappingURL=index.e1b27ffe.js.map

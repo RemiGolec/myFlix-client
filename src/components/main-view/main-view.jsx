@@ -30,7 +30,8 @@ class MainView extends React.Component {
     let accessToken = localStorage.getItem('token');
     if (accessToken !== null) {
       this.setState({
-        user: JSON.parse(localStorage.getItem('user')),
+        // user is the Username string
+        user: localStorage.getItem('user'),
       });
       this.getMovies(accessToken);
     }
@@ -55,11 +56,11 @@ class MainView extends React.Component {
   onLoggedIn(authData) {
     console.log('authData: ', authData);
     this.setState({
-      user: authData.user,
+      user: authData.user.Username,
     });
 
     localStorage.setItem('token', authData.token);
-    localStorage.setItem('user', JSON.stringify(authData.user));
+    localStorage.setItem('user', authData.user.Username);
     this.getMovies(authData.token);
   }
 
@@ -89,8 +90,6 @@ class MainView extends React.Component {
     console.log("render")
     const { movies, user } = this.state;
     console.log('user: ', user);
-    const username = user !== null ? user.Username : '';
-    console.log('username: ', username);
     // if (!user) return <RegistrationView onRegistration={user => this.onRegistration(user)} />;
     // console.log('should display movies now after successful registration but it isn\'t ');
 
@@ -104,7 +103,7 @@ class MainView extends React.Component {
 
         <NavbarView onLoggedOut={() => this.onLoggedOut()} />
         <Row>
-          {user && <Link to={`/users/${username}`} >logged in as {username}</Link>}
+          {user && <Link to={`/users/${user}`} >logged in as {user}</Link>}
         </Row>
 
         <Row className="main-view justify-content-md-center">
