@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Form, Button, Card, CardGroup, Container, Col, Row } from 'react-bootstrap';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 
@@ -11,27 +11,34 @@ import PropTypes from 'prop-types';
 export function ProfileUpdate(props) {
 
 
-    console.log("props: ", props);
-    const [username, setUsername] = useState('');
+    console.log("props profile update ", props);
+    const [username, setUsername] = useState(props.userData.Username);
     const [password, setPassword] = useState('');
-    const [email, setEmail] = useState('');
-    const [birthday, setBirthday] = useState('');
+    const [email, setEmail] = useState(props.userData.Email);
+    const [birthday, setBirthday] = useState(props.userData.Birthday);
+    const token = localStorage.getItem('token');
+    const userInfo = {
+        Username: username,
+        Password: password,
+        Email: email,
+        Birthday: birthday
+    }
 
     const handleUpdateUser = (e) => {
         e.preventDefault();
         /* Send a request to the server for authentication */
-        axios.put('https://morning-badlands-52426.herokuapp.com/users', {
-            Username: username,
-            Password: password,
-            Email: email,
-            Birthday: birthday
-        })
+        axios.put('https://morning-badlands-52426.herokuapp.com/users/' + props.userData.Username,
+            userInfo,
+            {
+                headers: { Authorization: `Bearer ${token}` },
+            })
             /* then call props.onRegistration(username) */
             .then(response => {
                 const data = response.data;
                 console.log(data);
                 alert("user updated");
-                // props.onRegistration(data);
+                localStorage.setItem('user', username);
+                location.reload();
                 props.history.push("/");
             })
             .catch(e => {
@@ -39,7 +46,6 @@ export function ProfileUpdate(props) {
                 alert('fill in all the fields in correct format');
             });
     };
-
 
 
     return (
@@ -54,7 +60,7 @@ export function ProfileUpdate(props) {
                                         <Card.Title>Update User</Card.Title>
                                         <Form>
                                             <Form.Group>
-                                                <Form.Label>Username:</Form.Label>
+                                                <Form.Label>Username: </Form.Label>
                                                 <Form.Control
                                                     type="text"
                                                     value={username}
@@ -67,7 +73,7 @@ export function ProfileUpdate(props) {
                                                 <Form.Control
                                                     type="password"
                                                     value={password}
-                                                    placeholder="Minimum 8 characters"
+                                                    placeholder="type current password or update password"
                                                     onChange={e => setPassword(e.target.value)}
                                                     minLength="8"
                                                     required />
@@ -84,7 +90,7 @@ export function ProfileUpdate(props) {
                                             <Form.Group>
                                                 <Form.Label>Birthday:</Form.Label>
                                                 <Form.Control
-                                                    type="date"
+                                                    type="text"
                                                     // pattern="\d{4}[\-]\d{2}[\-]\d{2}"
                                                     value={birthday}
                                                     onChange={e => setBirthday(e.target.value)}

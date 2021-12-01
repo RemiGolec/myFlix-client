@@ -21,7 +21,8 @@ class MainView extends React.Component {
     super();
     this.state = {
       movies: [],
-      user: null
+      user: null,
+      userData: {}
     };
     this.onLoggedOut = this.onLoggedOut.bind(this);
   }
@@ -34,6 +35,7 @@ class MainView extends React.Component {
         user: localStorage.getItem('user'),
       });
       this.getMovies(accessToken);
+      this.getUserData(accessToken);
     }
   }
 
@@ -47,6 +49,21 @@ class MainView extends React.Component {
         this.setState({
           movies: response.data
         });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  getUserData(token) {
+    console.log('get user data');
+    axios.get('https://morning-badlands-52426.herokuapp.com/users/' + localStorage.getItem('user'), {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then(response => {
+        console.log('user', response.data);
+        // Assign the result to the state
+        this.setState({ userData: response.data });
       })
       .catch(function (error) {
         console.log(error);
@@ -86,9 +103,8 @@ class MainView extends React.Component {
   }
 
   render() {
-    console.log("what's on")
-    console.log("render")
-    const { movies, user } = this.state;
+    console.log('any changes?');
+    const { movies, user, userData } = this.state;
     console.log('user: ', user);
     // if (!user) return <RegistrationView onRegistration={user => this.onRegistration(user)} />;
     // console.log('should display movies now after successful registration but it isn\'t ');
@@ -133,9 +149,9 @@ class MainView extends React.Component {
 
           }} />
 
-          <Route exact path={`/users/:username/profile-update`} render={({ history }) => {
+          <Route exact path={`/profile-update`} render={({ history }) => {
             if (!user) return <Redirect to="/" />
-            return <ProfileUpdate user={user} onBackClick={() => history.goBack()} />
+            return <ProfileUpdate userData={userData} user={user} onBackClick={() => history.goBack()} />
           }} />
 
 
