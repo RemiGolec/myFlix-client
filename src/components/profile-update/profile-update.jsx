@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Link } from 'react-router-dom';
 
 import React, { useState } from 'react';
 import axios from 'axios';
-import PropTypes from 'prop-types';
 
 
 

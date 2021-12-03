@@ -13,6 +13,7 @@ import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
 import NavbarView from '../navbar-view/NavbarView';
 import { ProfileUpdate } from '../profile-update/profile-update';
+import { ProfileDelete } from '../delete-profile-view/delete-profile-view';
 
 
 class MainView extends React.Component {
@@ -124,7 +125,6 @@ class MainView extends React.Component {
 
         <Row className="main-view justify-content-md-center">
           <Route exact path="/" render={({ history }) => {
-            // CODE BELOW TO BE ACTIV AFTER ALL VIEWS WORKING
             if (!user) return <Col>
               <LoginView history={history} onLoggedIn={user => this.onLoggedIn(user)} />
             </Col>
@@ -154,6 +154,10 @@ class MainView extends React.Component {
             return <ProfileUpdate userData={userData} user={user} onBackClick={() => history.goBack()} />
           }} />
 
+          <Route exact path={`/profile-delete`} render={({ history }) => {
+            if (!user) return <Redirect to="/" />
+            return <ProfileDelete />
+          }} />
 
           <Route exact path="/movies/:movieId" render={({ match, history }) => {
             if (movies.length === 0) return <div className="main-view" />;

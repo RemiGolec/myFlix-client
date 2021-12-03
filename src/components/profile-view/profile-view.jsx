@@ -48,13 +48,14 @@ export function ProfileView(props) {
                 <Card.Text>Date 0f Birth: {userData.Birthday}</Card.Text>
                 <Button
                     variant="dark"
-                    onClick={() => { onBackClick() }}
-                >
+                    onClick={() => { onBackClick() }}>
                     Back something
                 </Button>
-
                 <Link to={`/profile-update`} >
                     <Button>Update Profile</Button>
+                </Link>
+                <Link to={'/profile-delete'} >
+                    <Button>Delete Profile</Button>
                 </Link>
             </Card.Body>
         </Card >

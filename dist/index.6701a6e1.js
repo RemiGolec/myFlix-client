@@ -22766,6 +22766,7 @@ var _genreView = require("../genre-view/genre-view");
 var _navbarView = require("../navbar-view/NavbarView");
 var _navbarViewDefault = parcelHelpers.interopDefault(_navbarView);
 var _profileUpdate = require("../profile-update/profile-update");
+var _deleteProfileView = require("../delete-profile-view/delete-profile-view");
 class MainView extends _reactDefault.default.Component {
     constructor(){
         super();
@@ -22853,7 +22854,7 @@ class MainView extends _reactDefault.default.Component {
         return(/*#__PURE__*/ _jsxRuntime.jsxs(_reactRouterDom.BrowserRouter, {
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 118
+                lineNumber: 119
             },
             __self: this,
             children: [
@@ -22862,21 +22863,21 @@ class MainView extends _reactDefault.default.Component {
                     ,
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 120
+                        lineNumber: 121
                     },
                     __self: this
                 }),
                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 121
+                        lineNumber: 122
                     },
                     __self: this,
                     children: user && /*#__PURE__*/ _jsxRuntime.jsxs(_reactRouterDom.Link, {
                         to: `/users/${user}`,
                         __source: {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 122
+                            lineNumber: 123
                         },
                         __self: this,
                         children: [
@@ -22889,7 +22890,7 @@ class MainView extends _reactDefault.default.Component {
                     className: "main-view justify-content-md-center",
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 125
+                        lineNumber: 126
                     },
                     __self: this,
                     children: [
@@ -22897,7 +22898,6 @@ class MainView extends _reactDefault.default.Component {
                             exact: true,
                             path: "/",
                             render: ({ history  })=>{
-                                // CODE BELOW TO BE ACTIV AFTER ALL VIEWS WORKING
                                 if (!user) return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
                                     children: /*#__PURE__*/ _jsxRuntime.jsx(_loginView.LoginView, {
                                         history: history,
@@ -22918,7 +22918,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 126
+                                lineNumber: 127
                             },
                             __self: this
                         }),
@@ -22979,6 +22979,22 @@ class MainView extends _reactDefault.default.Component {
                         }),
                         /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Route, {
                             exact: true,
+                            path: `/profile-delete`,
+                            render: ({ history  })=>{
+                                if (!user) return(/*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Redirect, {
+                                    to: "/"
+                                }));
+                                return(/*#__PURE__*/ _jsxRuntime.jsx(_deleteProfileView.ProfileDelete, {
+                                }));
+                            },
+                            __source: {
+                                fileName: "src/components/main-view/main-view.jsx",
+                                lineNumber: 157
+                            },
+                            __self: this
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Route, {
+                            exact: true,
                             path: "/movies/:movieId",
                             render: ({ match , history  })=>{
                                 if (movies.length === 0) return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
@@ -22996,7 +23012,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 158
+                                lineNumber: 162
                             },
                             __self: this
                         }),
@@ -23018,7 +23034,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 168
+                                lineNumber: 172
                             },
                             __self: this
                         }),
@@ -23040,7 +23056,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 176
+                                lineNumber: 180
                             },
                             __self: this
                         })
@@ -23057,7 +23073,7 @@ exports.default = MainView;
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","./main-view.scss":"jyMAr","axios":"iYoWk","react-bootstrap":"h2YVd","react-router-dom":"cpyQW","../registration-view/registration-view":"aP2YV","../login-view/login-view":"054li","../profile-view/profile-view":"2E7Aw","../movie-card/movie-card":"6EiBJ","../movie-view/movie-view":"ikZdr","../director-view/director-view":"ck15y","../genre-view/genre-view":"8WCoL","../navbar-view/NavbarView":"i4ZGt","../profile-update/profile-update":"uoLJ2","@parcel/transformer-js/src/esmodule-helpers.js":"hMm45","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"8tZg2"}],"jyMAr":[function() {},{}],"iYoWk":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","./main-view.scss":"jyMAr","axios":"iYoWk","react-bootstrap":"h2YVd","react-router-dom":"cpyQW","../registration-view/registration-view":"aP2YV","../login-view/login-view":"054li","../profile-view/profile-view":"2E7Aw","../movie-card/movie-card":"6EiBJ","../movie-view/movie-view":"ikZdr","../director-view/director-view":"ck15y","../genre-view/genre-view":"8WCoL","../navbar-view/NavbarView":"i4ZGt","../profile-update/profile-update":"uoLJ2","@parcel/transformer-js/src/esmodule-helpers.js":"hMm45","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"8tZg2","../delete-profile-view/delete-profile-view":"aG8mP"}],"jyMAr":[function() {},{}],"iYoWk":[function(require,module,exports) {
 module.exports = require('./lib/axios');
 
 },{"./lib/axios":"3QmO2"}],"3QmO2":[function(require,module,exports) {
@@ -40279,16 +40295,32 @@ function ProfileView(props) {
                     to: `/profile-update`,
                     __source: {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 56
+                        lineNumber: 54
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 57
+                            lineNumber: 55
                         },
                         __self: this,
                         children: "Update Profile"
+                    })
+                }),
+                /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
+                    to: '/profile-delete',
+                    __source: {
+                        fileName: "src/components/profile-view/profile-view.jsx",
+                        lineNumber: 57
+                    },
+                    __self: this,
+                    children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
+                        __source: {
+                            fileName: "src/components/profile-view/profile-view.jsx",
+                            lineNumber: 58
+                        },
+                        __self: this,
+                        children: "Delete Profile"
                     })
                 })
             ]
@@ -41002,8 +41034,6 @@ var _reactBootstrap = require("react-bootstrap");
 var _reactRouterDom = require("react-router-dom");
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
-var _propTypes = require("prop-types");
-var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 var _s = $RefreshSig$();
 function ProfileUpdate(props) {
     _s();
@@ -41040,57 +41070,57 @@ function ProfileUpdate(props) {
     return(/*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.BrowserRouter, {
         __source: {
             fileName: "src/components/profile-update/profile-update.jsx",
-            lineNumber: 52
+            lineNumber: 51
         },
         __self: this,
         children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Container, {
             __source: {
                 fileName: "src/components/profile-update/profile-update.jsx",
-                lineNumber: 53
+                lineNumber: 52
             },
             __self: this,
             children: /*#__PURE__*/ _jsxRuntime.jsx("div", {
                 className: "form-container",
                 __source: {
                     fileName: "src/components/profile-update/profile-update.jsx",
-                    lineNumber: 54
+                    lineNumber: 53
                 },
                 __self: this,
                 children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
                     __source: {
                         fileName: "src/components/profile-update/profile-update.jsx",
-                        lineNumber: 55
+                        lineNumber: 54
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
                         __source: {
                             fileName: "src/components/profile-update/profile-update.jsx",
-                            lineNumber: 56
+                            lineNumber: 55
                         },
                         __self: this,
                         children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.CardGroup, {
                             __source: {
                                 fileName: "src/components/profile-update/profile-update.jsx",
-                                lineNumber: 57
+                                lineNumber: 56
                             },
                             __self: this,
                             children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card, {
                                 __source: {
                                     fileName: "src/components/profile-update/profile-update.jsx",
-                                    lineNumber: 58
+                                    lineNumber: 57
                                 },
                                 __self: this,
                                 children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Body, {
                                     __source: {
                                         fileName: "src/components/profile-update/profile-update.jsx",
-                                        lineNumber: 59
+                                        lineNumber: 58
                                     },
                                     __self: this,
                                     children: [
                                         /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card.Title, {
                                             __source: {
                                                 fileName: "src/components/profile-update/profile-update.jsx",
-                                                lineNumber: 60
+                                                lineNumber: 59
                                             },
                                             __self: this,
                                             children: "Update User"
@@ -41098,21 +41128,21 @@ function ProfileUpdate(props) {
                                         /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form, {
                                             __source: {
                                                 fileName: "src/components/profile-update/profile-update.jsx",
-                                                lineNumber: 61
+                                                lineNumber: 60
                                             },
                                             __self: this,
                                             children: [
                                                 /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form.Group, {
                                                     __source: {
                                                         fileName: "src/components/profile-update/profile-update.jsx",
-                                                        lineNumber: 62
+                                                        lineNumber: 61
                                                     },
                                                     __self: this,
                                                     children: [
                                                         /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                                             __source: {
                                                                 fileName: "src/components/profile-update/profile-update.jsx",
-                                                                lineNumber: 63
+                                                                lineNumber: 62
                                                             },
                                                             __self: this,
                                                             children: "Username: "
@@ -41126,7 +41156,7 @@ function ProfileUpdate(props) {
                                                             required: true,
                                                             __source: {
                                                                 fileName: "src/components/profile-update/profile-update.jsx",
-                                                                lineNumber: 64
+                                                                lineNumber: 63
                                                             },
                                                             __self: this
                                                         })
@@ -41135,14 +41165,14 @@ function ProfileUpdate(props) {
                                                 /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form.Group, {
                                                     __source: {
                                                         fileName: "src/components/profile-update/profile-update.jsx",
-                                                        lineNumber: 71
+                                                        lineNumber: 70
                                                     },
                                                     __self: this,
                                                     children: [
                                                         /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                                             __source: {
                                                                 fileName: "src/components/profile-update/profile-update.jsx",
-                                                                lineNumber: 72
+                                                                lineNumber: 71
                                                             },
                                                             __self: this,
                                                             children: "Password:"
@@ -41157,7 +41187,7 @@ function ProfileUpdate(props) {
                                                             required: true,
                                                             __source: {
                                                                 fileName: "src/components/profile-update/profile-update.jsx",
-                                                                lineNumber: 73
+                                                                lineNumber: 72
                                                             },
                                                             __self: this
                                                         })
@@ -41166,14 +41196,14 @@ function ProfileUpdate(props) {
                                                 /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form.Group, {
                                                     __source: {
                                                         fileName: "src/components/profile-update/profile-update.jsx",
-                                                        lineNumber: 81
+                                                        lineNumber: 80
                                                     },
                                                     __self: this,
                                                     children: [
                                                         /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                                             __source: {
                                                                 fileName: "src/components/profile-update/profile-update.jsx",
-                                                                lineNumber: 82
+                                                                lineNumber: 81
                                                             },
                                                             __self: this,
                                                             children: "Email:"
@@ -41187,7 +41217,7 @@ function ProfileUpdate(props) {
                                                             required: true,
                                                             __source: {
                                                                 fileName: "src/components/profile-update/profile-update.jsx",
-                                                                lineNumber: 83
+                                                                lineNumber: 82
                                                             },
                                                             __self: this
                                                         })
@@ -41196,14 +41226,14 @@ function ProfileUpdate(props) {
                                                 /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form.Group, {
                                                     __source: {
                                                         fileName: "src/components/profile-update/profile-update.jsx",
-                                                        lineNumber: 90
+                                                        lineNumber: 89
                                                     },
                                                     __self: this,
                                                     children: [
                                                         /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
                                                             __source: {
                                                                 fileName: "src/components/profile-update/profile-update.jsx",
-                                                                lineNumber: 91
+                                                                lineNumber: 90
                                                             },
                                                             __self: this,
                                                             children: "Birthday:"
@@ -41217,7 +41247,7 @@ function ProfileUpdate(props) {
                                                             required: true,
                                                             __source: {
                                                                 fileName: "src/components/profile-update/profile-update.jsx",
-                                                                lineNumber: 92
+                                                                lineNumber: 91
                                                             },
                                                             __self: this
                                                         })
@@ -41230,7 +41260,7 @@ function ProfileUpdate(props) {
                                                     onClick: handleUpdateUser,
                                                     __source: {
                                                         fileName: "src/components/profile-update/profile-update.jsx",
-                                                        lineNumber: 99
+                                                        lineNumber: 98
                                                     },
                                                     __self: this,
                                                     children: "Update"
@@ -41238,7 +41268,7 @@ function ProfileUpdate(props) {
                                                 /*#__PURE__*/ _jsxRuntime.jsx("br", {
                                                     __source: {
                                                         fileName: "src/components/profile-update/profile-update.jsx",
-                                                        lineNumber: 106
+                                                        lineNumber: 105
                                                     },
                                                     __self: this
                                                 }),
@@ -41249,7 +41279,7 @@ function ProfileUpdate(props) {
                                                     ,
                                                     __source: {
                                                         fileName: "src/components/profile-update/profile-update.jsx",
-                                                        lineNumber: 107
+                                                        lineNumber: 106
                                                     },
                                                     __self: this,
                                                     children: "go to Login"
@@ -41276,6 +41306,95 @@ $RefreshReg$(_c, "ProfileUpdate");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-bootstrap":"h2YVd","react-router-dom":"cpyQW","axios":"iYoWk","prop-types":"1tgq3","@parcel/transformer-js/src/esmodule-helpers.js":"hMm45","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"8tZg2"}],"jUTZ8":[function() {},{}]},["fO0zQ","au5hf","dLPEP"], "dLPEP", "parcelRequireaec4")
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-bootstrap":"h2YVd","react-router-dom":"cpyQW","axios":"iYoWk","@parcel/transformer-js/src/esmodule-helpers.js":"hMm45","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"8tZg2"}],"aG8mP":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$eef2 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$eef2.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ProfileDelete", ()=>ProfileDelete
+);
+var _jsxRuntime = require("react/jsx-runtime");
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _reactBootstrap = require("react-bootstrap");
+var _image = require("react-bootstrap/esm/Image");
+var _reactRouterDom = require("react-router-dom");
+function ProfileDelete() {
+    console.log("props profile delete");
+    const handleDeleteUser = (e)=>{
+        e.preventDefault();
+        _axiosDefault.default.delete('https://morning-badlands-52426.herokuapp.com/users/' + _image.propTypes.userData.Username).then((response)=>{
+            const data = response.data;
+            console.log(data);
+            alert('user deleted');
+            localStorage.removeItem('user', username);
+            location.reload();
+            props.history.push("/");
+        }).catch((e1)=>{
+            console.log('error in deleting user');
+            alert('user not deleted');
+        });
+    };
+    return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card, {
+        __source: {
+            fileName: "src/components/delete-profile-view/delete-profile-view.jsx",
+            lineNumber: 31
+        },
+        __self: this,
+        children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Body, {
+            __source: {
+                fileName: "src/components/delete-profile-view/delete-profile-view.jsx",
+                lineNumber: 32
+            },
+            __self: this,
+            children: [
+                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card.Title, {
+                    __source: {
+                        fileName: "src/components/delete-profile-view/delete-profile-view.jsx",
+                        lineNumber: 33
+                    },
+                    __self: this,
+                    children: "You're about to delete USER profile"
+                }),
+                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
+                    variant: "dark",
+                    __source: {
+                        fileName: "src/components/delete-profile-view/delete-profile-view.jsx",
+                        lineNumber: 37
+                    },
+                    __self: this,
+                    children: "Cancel"
+                }),
+                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
+                    variant: "danger",
+                    type: "submit",
+                    onClick: handleDeleteUser,
+                    __source: {
+                        fileName: "src/components/delete-profile-view/delete-profile-view.jsx",
+                        lineNumber: 43
+                    },
+                    __self: this,
+                    children: "Delete Profile"
+                })
+            ]
+        })
+    }));
+}
+_c = ProfileDelete;
+var _c;
+$RefreshReg$(_c, "ProfileDelete");
+
+  $parcel$ReactRefreshHelpers$eef2.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react":"6TuXu","react-bootstrap":"h2YVd","@parcel/transformer-js/src/esmodule-helpers.js":"hMm45","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"8tZg2","react/jsx-runtime":"8xIwr","react-router-dom":"cpyQW","axios":"iYoWk","react-bootstrap/esm/Image":"kKVYG"}],"jUTZ8":[function() {},{}]},["fO0zQ","au5hf","dLPEP"], "dLPEP", "parcelRequireaec4")
 
 //# sourceMappingURL=index.6701a6e1.js.map
