@@ -156,7 +156,7 @@ class MainView extends React.Component {
 
           <Route exact path={`/profile-delete`} render={({ history }) => {
             if (!user) return <Redirect to="/" />
-            return <ProfileDelete />
+            return <ProfileDelete userData={userData} user={user} />
           }} />
 
           <Route exact path="/movies/:movieId" render={({ match, history }) => {

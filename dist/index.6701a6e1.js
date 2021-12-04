@@ -22985,6 +22985,8 @@ class MainView extends _reactDefault.default.Component {
                                     to: "/"
                                 }));
                                 return(/*#__PURE__*/ _jsxRuntime.jsx(_deleteProfileView.ProfileDelete, {
+                                    userData: userData,
+                                    user: user
                                 }));
                             },
                             __source: {
@@ -41325,39 +41327,45 @@ var _reactDefault = parcelHelpers.interopDefault(_react);
 var _reactBootstrap = require("react-bootstrap");
 var _image = require("react-bootstrap/esm/Image");
 var _reactRouterDom = require("react-router-dom");
-function ProfileDelete() {
-    console.log("props profile delete");
+function ProfileDelete(props) {
+    console.log("props profile delete", props);
+    const token = localStorage.getItem('token');
+    const currentUser = localStorage.getItem('user');
     const handleDeleteUser = (e)=>{
         e.preventDefault();
-        _axiosDefault.default.delete('https://morning-badlands-52426.herokuapp.com/users/' + _image.propTypes.userData.Username).then((response)=>{
+        _axiosDefault.default.delete('https://morning-badlands-52426.herokuapp.com/users/' + currentUser, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then((response)=>{
             const data = response.data;
             console.log(data);
             alert('user deleted');
-            localStorage.removeItem('user', username);
+            localStorage.removeItem('user');
+            localStorage.removeItem('token');
             location.reload();
             props.history.push("/");
         }).catch((e1)=>{
             console.log('error in deleting user');
-            alert('user not deleted');
         });
     };
     return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card, {
         __source: {
             fileName: "src/components/delete-profile-view/delete-profile-view.jsx",
-            lineNumber: 31
+            lineNumber: 37
         },
         __self: this,
         children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Body, {
             __source: {
                 fileName: "src/components/delete-profile-view/delete-profile-view.jsx",
-                lineNumber: 32
+                lineNumber: 38
             },
             __self: this,
             children: [
                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card.Title, {
                     __source: {
                         fileName: "src/components/delete-profile-view/delete-profile-view.jsx",
-                        lineNumber: 33
+                        lineNumber: 39
                     },
                     __self: this,
                     children: "You're about to delete USER profile"
@@ -41366,7 +41374,7 @@ function ProfileDelete() {
                     variant: "dark",
                     __source: {
                         fileName: "src/components/delete-profile-view/delete-profile-view.jsx",
-                        lineNumber: 37
+                        lineNumber: 43
                     },
                     __self: this,
                     children: "Cancel"
@@ -41377,7 +41385,7 @@ function ProfileDelete() {
                     onClick: handleDeleteUser,
                     __source: {
                         fileName: "src/components/delete-profile-view/delete-profile-view.jsx",
-                        lineNumber: 43
+                        lineNumber: 49
                     },
                     __self: this,
                     children: "Delete Profile"

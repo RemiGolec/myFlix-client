@@ -4,25 +4,31 @@ import { Card, Button } from 'react-bootstrap';
 import { propTypes } from 'react-bootstrap/esm/Image';
 import { BrowserRouter as Router, Route, Redirect, Link } from "react-router-dom";
 
-export function ProfileDelete() {
+export function ProfileDelete(props) {
 
-    console.log("props profile delete");
+    console.log("props profile delete", props);
+    const token = localStorage.getItem('token');
+    const currentUser = localStorage.getItem('user');
+
 
     const handleDeleteUser = (e) => {
         e.preventDefault();
 
-        axios.delete('https://morning-badlands-52426.herokuapp.com/users/' + propTypes.userData.Username)
+        axios.delete('https://morning-badlands-52426.herokuapp.com/users/' + currentUser,
+            {
+                headers: { Authorization: `Bearer ${token}` },
+            })
             .then(response => {
                 const data = response.data;
                 console.log(data);
                 alert('user deleted');
-                localStorage.removeItem('user', username);
+                localStorage.removeItem('user');
+                localStorage.removeItem('token');
                 location.reload();
                 props.history.push("/");
             })
             .catch(e => {
                 console.log('error in deleting user');
-                alert('user not deleted');
             });
     }
 
