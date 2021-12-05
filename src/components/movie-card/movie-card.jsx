@@ -7,24 +7,22 @@ import axios from 'axios';
 
 export class MovieCard extends React.Component {
   render() {
-    const { movie, user } = this.props;
-    // const { user } = this.Username;
+    const { movie } = this.props;
+    const { currentUser } = localStorage.getItem('user');
+    const token = localStorage.getItem('token');
 
     const handleAddToFavourites = (e) => {
       e.preventDefault();
-      console.log('wish this was working');
-      /* Send a request to the server for authentication */
-      axios.put('https://morning-badlands-52426.herokuapp.com/users/', {
-        Username: { user: Username },
-        FavouriteMovies: this.movie,
-      })
+      console.log('add to Favourite movies');
+      axios.post(`https://morning-badlands-52426.herokuapp.com/users/${currentUser}/movies/${movie._id}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        })
         /* then call props.onRegistration(username) */
         .then(response => {
           const data = response.data;
           console.log(data);
           alert("movie added to favourites");
-          // props.onRegistration(data);
-          props.history.push("/");
         })
         .catch(e => {
           console.log('error adding movie to favourites');
@@ -72,6 +70,7 @@ export class MovieCard extends React.Component {
 
 MovieCard.propTypes = {
   movie: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
     Title: PropTypes.string.isRequired,
     Description: PropTypes.string.isRequired,
     Director: PropTypes.shape({
