@@ -7,14 +7,15 @@ import axios from 'axios';
 
 export class MovieCard extends React.Component {
   render() {
-    const { movie } = this.props;
-    const { currentUser } = localStorage.getItem('user');
+    let { movie } = this.props;
+    const currentUser = localStorage.getItem('user');
     const token = localStorage.getItem('token');
+    console.log(token, 'token');
 
     const handleAddToFavourites = (e) => {
       e.preventDefault();
       console.log('add to Favourite movies');
-      axios.post(`https://morning-badlands-52426.herokuapp.com/users/${currentUser}/movies/${movie._id}`,
+      axios.post(`https://morning-badlands-52426.herokuapp.com/users/${currentUser}/movies/${movie._id}`, {},
         {
           headers: { Authorization: `Bearer ${token}` },
         })

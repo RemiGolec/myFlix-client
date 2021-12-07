@@ -40360,13 +40360,15 @@ var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
 class MovieCard extends _reactDefault.default.Component {
     render() {
-        const { movie  } = this.props;
-        const { currentUser  } = localStorage.getItem('user');
+        let { movie  } = this.props;
+        const currentUser = localStorage.getItem('user');
         const token = localStorage.getItem('token');
+        console.log(token, 'token');
         const handleAddToFavourites = (e)=>{
             e.preventDefault();
             console.log('add to Favourite movies');
             _axiosDefault.default.post(`https://morning-badlands-52426.herokuapp.com/users/${currentUser}/movies/${movie._id}`, {
+            }, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -40383,7 +40385,7 @@ class MovieCard extends _reactDefault.default.Component {
             className: "bg-transparent movie_card_background",
             __source: {
                 fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 35
+                lineNumber: 36
             },
             __self: this,
             children: [
@@ -40391,7 +40393,7 @@ class MovieCard extends _reactDefault.default.Component {
                     className: "bg-dark text-white movie_card",
                     __source: {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 36
+                        lineNumber: 37
                     },
                     __self: this,
                     children: [
@@ -40403,7 +40405,7 @@ class MovieCard extends _reactDefault.default.Component {
                             className: "card_image",
                             __source: {
                                 fileName: "src/components/movie-card/movie-card.jsx",
-                                lineNumber: 39
+                                lineNumber: 40
                             },
                             __self: this
                         }),
@@ -40411,14 +40413,14 @@ class MovieCard extends _reactDefault.default.Component {
                             className: "image-overlay",
                             __source: {
                                 fileName: "src/components/movie-card/movie-card.jsx",
-                                lineNumber: 45
+                                lineNumber: 46
                             },
                             __self: this,
                             children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card.Title, {
                                 className: "card-title_image-overlay",
                                 __source: {
                                     fileName: "src/components/movie-card/movie-card.jsx",
-                                    lineNumber: 46
+                                    lineNumber: 47
                                 },
                                 __self: this,
                                 children: movie.Title
@@ -40430,14 +40432,14 @@ class MovieCard extends _reactDefault.default.Component {
                     to: `/movies/${movie._id}`,
                     __source: {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 49
+                        lineNumber: 50
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
                         variant: "link",
                         __source: {
                             fileName: "src/components/movie-card/movie-card.jsx",
-                            lineNumber: 50
+                            lineNumber: 51
                         },
                         __self: this,
                         children: "VIEW"
@@ -40447,14 +40449,14 @@ class MovieCard extends _reactDefault.default.Component {
                     to: `/directors/${movie.Director.Name}`,
                     __source: {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 52
+                        lineNumber: 53
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
                         variant: "link",
                         __source: {
                             fileName: "src/components/movie-card/movie-card.jsx",
-                            lineNumber: 53
+                            lineNumber: 54
                         },
                         __self: this,
                         children: "Director"
@@ -40464,14 +40466,14 @@ class MovieCard extends _reactDefault.default.Component {
                     to: `/genres/${movie.Genre.Name}`,
                     __source: {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 55
+                        lineNumber: 56
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
                         variant: "link",
                         __source: {
                             fileName: "src/components/movie-card/movie-card.jsx",
-                            lineNumber: 56
+                            lineNumber: 57
                         },
                         __self: this,
                         children: "Genre"
@@ -40484,7 +40486,7 @@ class MovieCard extends _reactDefault.default.Component {
                     onClick: handleAddToFavourites,
                     __source: {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 58
+                        lineNumber: 59
                     },
                     __self: this,
                     children: "Add to favourites"
