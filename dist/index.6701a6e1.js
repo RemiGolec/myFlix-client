@@ -40206,6 +40206,7 @@ function ProfileView(props) {
     console.log('props: ', props);
     const [userData, setUserData] = _react.useState({
     });
+    console.log('fav movies');
     function getUserData(token) {
         console.log('get user data');
         _axiosDefault.default.get('https://morning-badlands-52426.herokuapp.com/users/' + props.user, {
@@ -40224,32 +40225,23 @@ function ProfileView(props) {
         console.log('use effect');
         getUserData(localStorage.getItem('token'));
     }, []);
-    /**
-     * TODO
-     * - Step1: create a userData variable using setState. Example of this is in the RegistrationView. The default should be null
-     * - Step2: Create a function called `getUserData`.
-     * - Step3: In getUSerData, make an axios GET request to get the user by username. The username to use is in the props.
-     *    - An example of the GET request: Take a look at the getMovies function
-     *    - The API url to get a user by username: Take a look at your postman or the server
-     * - Step4: When you get the data back from the server in the `.then` function, use setState to store the user information in state of this component
-     * - Step5: finally display the user information stored in state in the card below
-     */ return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card, {
+    return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card, {
         __source: {
             fileName: "src/components/profile-view/profile-view.jsx",
-            lineNumber: 44
+            lineNumber: 36
         },
         __self: this,
         children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Body, {
             __source: {
                 fileName: "src/components/profile-view/profile-view.jsx",
-                lineNumber: 45
+                lineNumber: 37
             },
             __self: this,
             children: [
                 /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Title, {
                     __source: {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 46
+                        lineNumber: 38
                     },
                     __self: this,
                     children: [
@@ -40260,7 +40252,7 @@ function ProfileView(props) {
                 /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Text, {
                     __source: {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 47
+                        lineNumber: 39
                     },
                     __self: this,
                     children: [
@@ -40271,12 +40263,23 @@ function ProfileView(props) {
                 /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Text, {
                     __source: {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 48
+                        lineNumber: 40
                     },
                     __self: this,
                     children: [
                         "Date 0f Birth: ",
                         userData.Birthday
+                    ]
+                }),
+                /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Text, {
+                    __source: {
+                        fileName: "src/components/profile-view/profile-view.jsx",
+                        lineNumber: 41
+                    },
+                    __self: this,
+                    children: [
+                        "Favourite Movies: ",
+                        userData.FavouriteMovies
                     ]
                 }),
                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
@@ -40286,7 +40289,7 @@ function ProfileView(props) {
                     },
                     __source: {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 49
+                        lineNumber: 42
                     },
                     __self: this,
                     children: "Back something"
@@ -40295,13 +40298,13 @@ function ProfileView(props) {
                     to: `/profile-update`,
                     __source: {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 54
+                        lineNumber: 47
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 55
+                            lineNumber: 48
                         },
                         __self: this,
                         children: "Update Profile"
@@ -40311,13 +40314,13 @@ function ProfileView(props) {
                     to: '/profile-delete',
                     __source: {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 57
+                        lineNumber: 50
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 58
+                            lineNumber: 51
                         },
                         __self: this,
                         children: "Delete Profile"
