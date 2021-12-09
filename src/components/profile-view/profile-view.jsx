@@ -11,8 +11,9 @@ export function ProfileView(props) {
 
     console.log('fav movies');
 
-    function getUserData(token) {
+    function getUserData() {
         console.log('get user data');
+        const token = localStorage.getItem('token')
         axios.get('https://morning-badlands-52426.herokuapp.com/users/' + props.user, {
             headers: { Authorization: `Bearer ${token}` }
         })
@@ -28,7 +29,7 @@ export function ProfileView(props) {
 
     useEffect(() => {
         console.log('use effect');
-        getUserData(localStorage.getItem('token'))
+        getUserData()
     }, [])
 
 
@@ -41,7 +42,7 @@ export function ProfileView(props) {
                 <Card.Text>Favourite Movies: {userData.FavouriteMovies}</Card.Text>
                 <Button
                     variant="dark"
-                    onClick={() => { onBackClick() }}>
+                    onClick={() => { props.onBackClick() }}>
                     Back something
                 </Button>
                 <Link to={`/profile-update`} >
