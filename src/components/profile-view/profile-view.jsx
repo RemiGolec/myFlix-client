@@ -33,6 +33,8 @@ export function ProfileView(props) {
     }, [])
 
 
+
+
     return (
         < Card >
             <Card.Body>
@@ -43,13 +45,15 @@ export function ProfileView(props) {
                 <Button
                     variant="dark"
                     onClick={() => { props.onBackClick() }}>
-                    Back something
+                    Back
                 </Button>
                 <Link to={`/profile-update`} >
                     <Button>Update Profile</Button>
                 </Link>
                 <Link to={'/profile-delete'} >
-                    <Button>Delete Profile</Button>
+                    <Button
+                        variant="danger"
+                    >Delete Profile</Button>
                 </Link>
             </Card.Body>
         </Card >

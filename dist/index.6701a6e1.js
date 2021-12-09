@@ -40229,20 +40229,20 @@ function ProfileView(props) {
     return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card, {
         __source: {
             fileName: "src/components/profile-view/profile-view.jsx",
-            lineNumber: 37
+            lineNumber: 39
         },
         __self: this,
         children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Body, {
             __source: {
                 fileName: "src/components/profile-view/profile-view.jsx",
-                lineNumber: 38
+                lineNumber: 40
             },
             __self: this,
             children: [
                 /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Title, {
                     __source: {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 39
+                        lineNumber: 41
                     },
                     __self: this,
                     children: [
@@ -40253,7 +40253,7 @@ function ProfileView(props) {
                 /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Text, {
                     __source: {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 40
+                        lineNumber: 42
                     },
                     __self: this,
                     children: [
@@ -40264,7 +40264,7 @@ function ProfileView(props) {
                 /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Text, {
                     __source: {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 41
+                        lineNumber: 43
                     },
                     __self: this,
                     children: [
@@ -40275,7 +40275,7 @@ function ProfileView(props) {
                 /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Text, {
                     __source: {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 42
+                        lineNumber: 44
                     },
                     __self: this,
                     children: [
@@ -40290,22 +40290,22 @@ function ProfileView(props) {
                     },
                     __source: {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 43
+                        lineNumber: 45
                     },
                     __self: this,
-                    children: "Back something"
+                    children: "Back"
                 }),
                 /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
                     to: `/profile-update`,
                     __source: {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 48
+                        lineNumber: 50
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 49
+                            lineNumber: 51
                         },
                         __self: this,
                         children: "Update Profile"
@@ -40315,13 +40315,14 @@ function ProfileView(props) {
                     to: '/profile-delete',
                     __source: {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 51
+                        lineNumber: 53
                     },
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
+                        variant: "danger",
                         __source: {
                             fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 52
+                            lineNumber: 54
                         },
                         __self: this,
                         children: "Delete Profile"
