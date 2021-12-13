@@ -17,6 +17,7 @@ export function LoginView({
     e.preventDefault();
     /* Send a request to the server for authentication */
     axios.post('https://morning-badlands-52426.herokuapp.com/login', {
+      // axios.post('http://localhost:5000/login', {
       Username: username,
       Password: password
     })
@@ -86,7 +87,7 @@ export function LoginView({
                         variant="dark"
                         type="submit"
                         onClick={handleClickRegister}>
-                        Register work in progress
+                        Register here
                       </Button>
                     </ButtonGroup>
                   </ButtonToolbar>

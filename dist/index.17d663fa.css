@@ -32,6 +32,13 @@
 .button {
   margin-top: 15px;
 }
+.button {
+  margin-right: 10px;
+}
+
+.image_fav_list {
+  width: 5em;
+}
 .movie_card_background {
   margin-top: 1em;
   margin-bottom: 1em;

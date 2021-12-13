@@ -42,6 +42,7 @@ class MainView extends React.Component {
 
   getMovies(token) {
     axios.get('https://morning-badlands-52426.herokuapp.com/movies', {
+      // axios.get('http://localhost:5000/movies', {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
@@ -59,6 +60,7 @@ class MainView extends React.Component {
   getUserData(token) {
     console.log('get user data');
     axios.get('https://morning-badlands-52426.herokuapp.com/users/' + localStorage.getItem('user'), {
+      // axios.get('http://localhost:5000/users/' + localStorage.getItem('user'), {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
@@ -117,6 +119,7 @@ class MainView extends React.Component {
       <Router>
 
         <NavbarView onLoggedOut={() => this.onLoggedOut()} />
+        {/* ----------------  LOGGED IN AS <user>  */}
         <Row>
           {user && <Link to={`/users/${user}`} >logged in as {user}</Link>}
         </Row>
@@ -143,7 +146,7 @@ class MainView extends React.Component {
 
           <Route exact path={`/users/:username`} render={({ history }) => {
             if (!user) return <Redirect to="/" />
-            return <ProfileView user={user} onBackClick={() => history.goBack()} />
+            return <ProfileView userData={userData} user={user} onBackClick={() => history.goBack()} movies={movies} />
 
           }} />
 
