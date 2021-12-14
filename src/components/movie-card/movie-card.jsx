@@ -15,8 +15,8 @@ export class MovieCard extends React.Component {
     const handleAddToFavourites = (e) => {
       e.preventDefault();
       console.log('add to Favourite movies');
-      // axios.post(`https://morning-badlands-52426.herokuapp.com/users/${currentUser}/movies/${movie._id}`, {},
-      axios.post(`http://localhost:5000/users/${currentUser}/movies/${movie._id}`, {},
+      axios.post(`https://morning-badlands-52426.herokuapp.com/users/${currentUser}/movies/${movie._id}`, {},
+        // axios.post(`http://localhost:5000/users/${currentUser}/movies/${movie._id}`, {},
         {
           headers: { Authorization: `Bearer ${token}` },
         })
