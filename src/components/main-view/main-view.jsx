@@ -2,16 +2,18 @@ import React from 'react';
 import './main-view.scss';
 import axios from 'axios';
 import { Container, Row, Col, Navbar, Nav, Button } from 'react-bootstrap';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect, Link } from "react-router-dom";
 
 import { RegistrationView } from '../registration-view/registration-view';
 import { LoginView } from '../login-view/login-view';
+import { ProfileView } from '../profile-view/profile-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
-
-import Logo from '../../logo/logo.png';
+import NavbarView from '../navbar-view/NavbarView';
+import { ProfileUpdate } from '../profile-update/profile-update';
+import { ProfileDelete } from '../delete-profile-view/delete-profile-view';
 
 
 class MainView extends React.Component {
@@ -20,16 +22,31 @@ class MainView extends React.Component {
     super();
     this.state = {
       movies: [],
-      selectedMovie: null,
-      user: null
+      user: null,
+      userData: {}
     };
+    this.onLoggedOut = this.onLoggedOut.bind(this);
+  }
+
+  componentDidMount() {
+    let accessToken = localStorage.getItem('token');
+    if (accessToken !== null) {
+      this.setState({
+        // user is the Username string
+        user: localStorage.getItem('user'),
+      });
+      this.getMovies(accessToken);
+      this.getUserData(accessToken);
+    }
   }
 
   getMovies(token) {
     axios.get('https://morning-badlands-52426.herokuapp.com/movies', {
+      // axios.get('http://localhost:5000/movies', {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
+        console.log('movies: ', response.data);
         // Assign the result to the state
         this.setState({
           movies: response.data
@@ -40,18 +57,24 @@ class MainView extends React.Component {
       });
   }
 
-  componentDidMount() {
-    let accessToken = localStorage.getItem('token');
-    if (accessToken !== null) {
-      this.setState({
-        user: localStorage.getItem('user')
+  getUserData(token) {
+    console.log('get user data');
+    axios.get('https://morning-badlands-52426.herokuapp.com/users/' + localStorage.getItem('user'), {
+      // axios.get('http://localhost:5000/users/' + localStorage.getItem('user'), {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then(response => {
+        console.log('user', response.data);
+        // Assign the result to the state
+        this.setState({ userData: response.data });
+      })
+      .catch(function (error) {
+        console.log(error);
       });
-      this.getMovies(accessToken);
-    }
   }
 
   onLoggedIn(authData) {
-    console.log(authData);
+    console.log('authData: ', authData);
     this.setState({
       user: authData.user.Username,
     });
@@ -67,6 +90,7 @@ class MainView extends React.Component {
     this.setState({
       user: null
     });
+    // TODO: Redirect to "/"
   }
 
 
@@ -82,64 +106,64 @@ class MainView extends React.Component {
   }
 
   render() {
-    console.log("render")
-    const { movies, user } = this.state;
-    if (!user) return <RegistrationView onRegistration={user => this.onRegistration(user)} />;
-    // console.log('should display movies now after successful registration but it isn\'t ');
+    const { movies, user, userData } = this.state;
+    console.log('user: ', user);
+    // if (!user) return <RegistrationView onRegistration={user => this.onRegistration(user)} />;
+
+    // if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
 
 
-
-    /* Before the movies have been loaded */
-    if (movies.length === 0) return <div className="main-view" />;
 
     return (
 
       <Router>
 
-        <Navbar className="navbar"
-          collapseOnSelect
-          expand="lg"
-          variant="dark"
-          sticky="top">
-          <Container>
-            <Navbar.Brand href="#home">
-              <img
-                alt=""
-                src={Logo}
-                height="100"
-                className="d-inline-block align-top"
-              />{''}
-            </Navbar.Brand>
-            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-            <Navbar.Collapse id="responsive-navbar-nav">
-              <Nav className="nav-link">
-                <Nav.Link href="#home" >Home</Nav.Link>
-                <Nav.Link href="#features">Features</Nav.Link>
-                <Nav.Link href="#pricing">Pricing</Nav.Link>
-                <Nav.Link onClick={() => { this.onLoggedOut() }}>Logout</Nav.Link>
-              </Nav>
-            </Navbar.Collapse>
-          </Container>
-        </Navbar>
+        <NavbarView onLoggedOut={() => this.onLoggedOut()} />
+        {/* ----------------  LOGGED IN AS <user>  */}
+        <Row>
+          {user && <Link to={`/users/${user}`} >logged in as {user}</Link>}
+        </Row>
 
         <Row className="main-view justify-content-md-center">
-          <Route exact path="/" render={() => {
-            if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
-
+          <Route exact path="/" render={({ history }) => {
+            if (!user) return <Col>
+              <LoginView history={history} onLoggedIn={user => this.onLoggedIn(user)} />
+            </Col>
+            if (movies.length === 0) return <div className="main-view" />;
             console.log("rootpath");
             return movies.map(m => (
-              <Col md={3}>
-                <MovieCard key={m._id} movie={m} />
+              <Col md={3} key={m._id}>
+                <MovieCard movie={m} />
+
               </Col>
             ))
           }} />
 
-          <Route exact path="/register" render={() => {
-            return <RegistrationView />
+          <Route exact path="/register" render={({ history }) => {
+            if (user) return <Redirect to="/" />
+            return <RegistrationView history={history} onRegistration={(user) => this.onRegistration(user)} />
+          }} />
+
+          <Route exact path={`/users/:username`} render={({ history }) => {
+            if (!user) return <Redirect to="/" />
+            return <ProfileView userData={userData} user={user} onBackClick={() => history.goBack()} movies={movies} />
+
+          }} />
+
+          <Route exact path={`/profile-update`} render={({ history }) => {
+            if (!user) return <Redirect to="/" />
+            return <ProfileUpdate userData={userData} user={user} onBackClick={() => history.goBack()} />
+          }} />
+
+          <Route exact path={`/profile-delete`} render={({ history }) => {
+            if (!user) return <Redirect to="/" />
+            return <ProfileDelete userData={userData} user={user} />
           }} />
 
           <Route exact path="/movies/:movieId" render={({ match, history }) => {
+            if (movies.length === 0) return <div className="main-view" />;
             console.log("movieview_path");
+
             return <Col lg={8}>
               <MovieView movie={movies.find(m => m._id === match.params.movieId)}
                 onBackClick={() => history.goBack()} />

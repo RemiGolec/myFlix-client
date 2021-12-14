@@ -1,3 +1,44 @@
+.main-view {
+  height: 100%;
+}
+
+.navbar {
+  height: 90px;
+  margin-bottom: 10px;
+  background: linear-gradient(black 50%, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 100%);
+}
+
+.nav-link:hover {
+  color: #a7ffff !important;
+}
+
+.nav-link {
+  margin-left: auto !important;
+}
+.registration-view_logo {
+  width: 10em;
+  margin: 2em;
+}
+
+.image-container {
+  text-align: center;
+}
+
+.form-container {
+  max-width: 450px;
+  margin: auto;
+}
+
+.button {
+  margin-top: 15px;
+}
+.button {
+  margin-right: 10px;
+}
+
+.image_fav_list {
+  width: 5em;
+}
 .movie_card_background {
   margin-top: 1em;
   margin-bottom: 1em;
@@ -51,42 +92,8 @@
   margin: 10%;
   color: rgba(255, 255, 255, 0.844);
 }
-.registration-view_logo {
-  width: 10em;
-  margin: 2em;
-}
-
-.image-container {
-  text-align: center;
-}
-
-.form-container {
-  max-width: 450px;
-  margin: auto;
-}
-
-.button {
-  margin-top: 15px;
-}
-.main-view {
-  height: 100%;
-}
-
-.navbar {
-  height: 90px;
-  margin-bottom: 10px;
-  background: linear-gradient(black 50%, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 100%);
-}
-
-.nav-link:hover {
-  color: #a7ffff !important;
-}
-
-.nav-link {
-  margin-left: auto !important;
-}
 .app-container {
   background-color: #141414;
   min-height: 100vh;
 }
-/*# sourceMappingURL=index.3f764291.css.map */
+/*# sourceMappingURL=index.17d663fa.css.map */

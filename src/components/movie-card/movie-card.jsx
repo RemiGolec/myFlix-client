@@ -1,12 +1,37 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card, Button, Container, Link } from 'react-bootstrap';
+import { Card, Button, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './movie-card.scss';
+import axios from 'axios';
 
 export class MovieCard extends React.Component {
   render() {
-    const { movie } = this.props;
+    let { movie } = this.props;
+    const currentUser = localStorage.getItem('user');
+    const token = localStorage.getItem('token');
+    console.log(token, 'token');
+
+    const handleAddToFavourites = (e) => {
+      e.preventDefault();
+      console.log('add to Favourite movies');
+      axios.post(`https://morning-badlands-52426.herokuapp.com/users/${currentUser}/movies/${movie._id}`, {},
+        // axios.post(`http://localhost:5000/users/${currentUser}/movies/${movie._id}`, {},
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        /* then call props.onRegistration(username) */
+        .then(response => {
+          const data = response.data;
+          console.log(data);
+          alert("movie added to favourites");
+        })
+        .catch(e => {
+          console.log('error adding movie to favourites');
+          alert('movie NOT added to favourites');
+        });
+    };
+
 
     return (
       <Card className="bg-transparent movie_card_background">
@@ -32,6 +57,13 @@ export class MovieCard extends React.Component {
         <Link to={`/genres/${movie.Genre.Name}`}>
           <Button variant="link">Genre</Button>
         </Link>
+        <Button
+          className="button"
+          variant="dark"
+          type="submit"
+          onClick={handleAddToFavourites}>
+          Add to favourites
+        </Button>
       </Card>
 
     );
@@ -40,6 +72,7 @@ export class MovieCard extends React.Component {
 
 MovieCard.propTypes = {
   movie: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
     Title: PropTypes.string.isRequired,
     Description: PropTypes.string.isRequired,
     Director: PropTypes.shape({

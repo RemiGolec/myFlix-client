@@ -10,6 +10,7 @@ import Logo from '../../logo/logo.png'
 import axios from 'axios';
 
 export function RegistrationView(props) {
+  console.log("props: ", props);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
@@ -29,8 +30,8 @@ export function RegistrationView(props) {
         const data = response.data;
         console.log(data);
         alert("successful registration");
-        props.onRegistration(data);
-        window.open('/', '_self');
+        // props.onRegistration(data);
+        props.history.push("/");
       })
       .catch(e => {
         console.log('wrong format or incomplete data');
@@ -100,9 +101,7 @@ export function RegistrationView(props) {
                         onClick={handleRegister}>
                         Submit
                       </Button>
-                      <Link to={"/"}>
-                        <Button>go to Login</Button>
-                      </Link>
+                      <Button onClick={() => props.history.push("/")}>go to Login</Button>
                     </Form>
                   </Card.Body>
                 </Card>
