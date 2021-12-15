@@ -36,8 +36,41 @@
   margin-right: 10px;
 }
 
-.image_fav_list {
-  width: 5em;
+.fav-movie {
+  margin-bottom: 15px;
+}
+.fav-movie figure {
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: auto;
+  width: 100%;
+}
+.fav-movie figure img {
+  height: 350px;
+  width: auto;
+  margin: auto;
+  display: block;
+}
+.fav-movie button.btn {
+  margin: auto;
+  display: block;
+}
+.fav-movie .figure-caption {
+  text-align: center;
+}
+.fav-movie a {
+  text-decoration: none;
+}
+
+.fav-movies-card.card {
+  background: black;
+  color: white;
+}
+
+.card-group {
+  margin-bottom: 25px;
 }
 .movie_card_background {
   margin-top: 1em;
