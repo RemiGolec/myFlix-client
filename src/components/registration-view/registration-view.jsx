@@ -20,6 +20,7 @@ export function RegistrationView(props) {
     e.preventDefault();
     /* Send a request to the server for authentication */
     axios.post('https://morning-badlands-52426.herokuapp.com/users', {
+      // axios.post('https://localhost:5000/users', {
       Username: username,
       Password: password,
       Email: email,

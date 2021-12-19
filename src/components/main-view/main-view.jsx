@@ -26,6 +26,7 @@ class MainView extends React.Component {
       userData: {}
     };
     this.onLoggedOut = this.onLoggedOut.bind(this);
+    this.addToFavorites = this.addToFavorites.bind(this);
   }
 
   componentDidMount() {
@@ -38,6 +39,25 @@ class MainView extends React.Component {
       this.getMovies(accessToken);
       this.getUserData(accessToken);
     }
+  }
+
+  addToFavorites(movie) {
+    let favorites = this.state.userData.FavouriteMovies;
+    alert('1');
+
+    if (favorites.indexOf(movie) < 0) {
+      alert('2');
+      favorites.push(movie);
+    }
+
+    this.setState(prevState => ({
+      ...prevState,
+      userData: {
+        ...prevState.userData,
+        FavouriteMovies: favorites
+      }
+    })
+    );
   }
 
   getMovies(token) {
@@ -133,7 +153,7 @@ class MainView extends React.Component {
             console.log("rootpath");
             return movies.map(m => (
               <Col md={3} key={m._id}>
-                <MovieCard movie={m} />
+                <MovieCard movie={m} addToFavourites={this.addToFavourites} />
 
               </Col>
             ))
@@ -185,7 +205,6 @@ class MainView extends React.Component {
                 onBackClick={() => history.goBack()} />
             </Col>
           }} />
-
 
         </Row>
       </Router>

@@ -6,6 +6,63 @@ import { BrowserRouter as Router, Route, Redirect, Link } from "react-router-dom
 import axios from 'axios';
 import FigureImage from 'react-bootstrap/esm/FigureImage';
 
+
+// ----------- STATE-EXERCISE function element
+// function StateExercise() {
+//     console.log('state-exercise');
+
+//     const [name, setName] = useState('Any name will do');
+//     const [count, setCount] = useState(0);
+
+//     function decrementCount() {
+//         setCount(previousCount => previousCount - 1);
+//     }
+//     function incrementCount() {
+//         setCount(previousCount => previousCount + 1);
+//     }
+
+//     return (
+//         <>
+//             <Row>
+//                 <Col>
+//                     <Card>
+//                         <Card.Body>
+//                             <Card.Title>this is STATE exercise</Card.Title>
+//                             <Button onClick={decrementCount}>-</Button>
+//                             <Card.Title>counter:{count}</Card.Title>
+//                             <Button onClick={incrementCount}>+</Button>
+//                         </Card.Body>
+
+//                     </Card>
+//                 </Col>
+//             </Row>
+//             <Row>
+//                 <Col>
+//                     <Card>
+//                         <Card.Body>
+//                             <Card.Title>this is STATE exercise</Card.Title>
+//                             <Card.Title>Welcome:{name}</Card.Title>
+//                             <Form>
+//                                 <Form.Group>
+//                                     <Form.Label>enter your name here</Form.Label>
+//                                     <Form.Control
+//                                         onChange={e => setName(e.target.value)}
+//                                     />
+//                                 </Form.Group>
+//                             </Form>
+//                         </Card.Body>
+
+//                     </Card>
+//                 </Col>
+//             </Row>
+
+//         </>
+//     );
+// }
+//------------------  END OF STATE-EXERCISE 
+
+
+
 export function ProfileView(props) {
     console.log('props: ', props);
 
@@ -14,6 +71,13 @@ export function ProfileView(props) {
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState(props.userData.Email);
     const [birthday, setBirthday] = useState(props.userData.Birthday);
+
+    // ----------  VARIABLES FOR FAVOURITE MOVIES LIST  
+    // const [favorites, setFavorites] = useState(props.userData.FavouriteMovies);
+
+
+
+
 
 
     const currentUser = localStorage.getItem('user');
@@ -49,6 +113,9 @@ export function ProfileView(props) {
     return (
 
         <>
+            {/* ----------- STATE-EXERCISE function element in use */}
+            {/* <StateExercise /> */}
+
             <Row xs={1} md={1} lg={2} className="g-5">
                 {/*  ----------------   USER PROFILE */}
                 <Col >
