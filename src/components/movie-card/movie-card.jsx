@@ -66,15 +66,6 @@ export class MovieCard extends React.Component {
           onClick={handleAddToFavourites}>
           Add to favourites
         </Button>
-
-        {/* --------- BUTTON FOR UPDATING STATE of FAVOURITE MOVIES */}
-        <Button
-          className="button"
-          variant="warning"
-        // onClick={handleUpdateFavourites}
-        >
-          Update favourites
-        </Button>
       </Card>
 
     );
