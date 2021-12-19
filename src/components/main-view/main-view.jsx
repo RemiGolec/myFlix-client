@@ -26,7 +26,7 @@ class MainView extends React.Component {
       userData: {}
     };
     this.onLoggedOut = this.onLoggedOut.bind(this);
-    this.addToFavorites = this.addToFavorites.bind(this);
+    this.addToFavourites = this.addToFavourites.bind(this);
   }
 
   componentDidMount() {
@@ -41,20 +41,20 @@ class MainView extends React.Component {
     }
   }
 
-  addToFavorites(movie) {
-    let favorites = this.state.userData.FavouriteMovies;
+  addToFavourites(movie) {
+    let favourites = this.state.userData.FavouriteMovies;
     alert('1');
 
-    if (favorites.indexOf(movie) < 0) {
+    if (favourites.indexOf(movie) < 0) {
       alert('2');
-      favorites.push(movie);
+      favourites.push(movie);
     }
 
     this.setState(prevState => ({
       ...prevState,
       userData: {
         ...prevState.userData,
-        FavouriteMovies: favorites
+        FavouriteMovies: favourites
       }
     })
     );
@@ -156,6 +156,7 @@ class MainView extends React.Component {
                 <MovieCard movie={m} addToFavourites={this.addToFavourites} />
 
               </Col>
+
             ))
           }} />
 
@@ -166,7 +167,7 @@ class MainView extends React.Component {
 
           <Route exact path={`/users/:username`} render={({ history }) => {
             if (!user) return <Redirect to="/" />
-            return <ProfileView userData={userData} user={user} onBackClick={() => history.goBack()} movies={movies} />
+            return <ProfileView userData={userData} user={user} onBackClick={() => history.goBack()} onLoggedOut={() => this.onLoggedOut()} movies={movies} />
 
           }} />
 
@@ -177,7 +178,7 @@ class MainView extends React.Component {
 
           <Route exact path={`/profile-delete`} render={({ history }) => {
             if (!user) return <Redirect to="/" />
-            return <ProfileDelete userData={userData} user={user} />
+            return <ProfileDelete userData={userData} user={user} onBackClick={() => history.goBack()} />
           }} />
 
           <Route exact path="/movies/:movieId" render={({ match, history }) => {

@@ -41,12 +41,15 @@ export function ProfileDelete(props) {
                 <Card.Text>Email: {userData.Email}</Card.Text>
                 <Card.Text>Date 0f Birth: {userData.Birthday}</Card.Text> */}
                 <Button
+                    className="button"
                     variant="dark"
-                // onClick={() => { onBackClick() }}
+                    onClick={() => { props.onBackClick() }}
                 >
                     Cancel
                 </Button>
                 <Button
+                    className="button"
+                    style={{ float: 'right' }}
                     variant="danger"
                     type="submit"
                     onClick={handleDeleteUser}>

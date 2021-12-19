@@ -15,11 +15,17 @@ export function ProfileView(props) {
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState(props.userData.Email);
     const [birthday, setBirthday] = useState(props.userData.Birthday);
-
+    const token = localStorage.getItem('token');
+    const userInfo = {
+        Username: username,
+        Password: password,
+        Email: email,
+        Birthday: birthday
+    }
     const currentUser = localStorage.getItem('user');
     const { movies, userData } = props;
     console.log(userData, 'userdata');
-    const favorites = movies.filter(movie => userData.FavouriteMovies.indexOf(movie._id) > -1);
+    const favourites = movies.filter(movie => userData.FavouriteMovies.indexOf(movie._id) > -1);
 
     const handleRemoveFromFavourites = (movieId) => {
         // e.preventDefault();
@@ -41,6 +47,32 @@ export function ProfileView(props) {
                 alert('movie NOT removed from favourites');
             });
     };
+
+    const handleUpdateUser = (e) => {
+        e.preventDefault();
+        /* Send a request to the server for authentication */
+        axios.put('https://morning-badlands-52426.herokuapp.com/users/' + props.userData.Username,
+            userInfo,
+            {
+                headers: { Authorization: `Bearer ${token}` },
+            })
+            /* then call props.onRegistration(username) */
+            .then(response => {
+                const data = response.data;
+                console.log(data);
+                alert("user updated");
+                localStorage.setItem('user', username);
+                location.reload();
+                props.history.push("/");
+            })
+            .catch(e => {
+                console.log('wrong format or incomplete data');
+                alert('fill in all the fields in correct format');
+            });
+    };
+
+
+
 
     useEffect(() => {
 
@@ -119,15 +151,8 @@ export function ProfileView(props) {
                                         className="button"
                                         variant="warning"
                                         type="submit"
-                                    // onClick={handleUpdateUser}
-                                    >
+                                        onClick={handleUpdateUser}>
                                         Update Profile
-                                    </Button>
-                                    <Button
-                                        className="button"
-                                        variant="dark"
-                                        onClick={() => props.history.push("/")}>
-                                        go to Login
                                     </Button>
                                     <Link to={'/profile-delete'} >
                                         <Button
@@ -153,7 +178,7 @@ export function ProfileView(props) {
                         </Col>
                     </Row>
                     <Row>
-                        {favorites.map(m => {
+                        {favourites.map(m => {
                             return (
                                 <Col xs={12} md={6} lg={3} key={m._id} className="fav-movie" >
                                     <Figure>
