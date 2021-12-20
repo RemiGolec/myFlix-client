@@ -22792,11 +22792,7 @@ class MainView extends _reactDefault.default.Component {
     }
     addToFavourites(movie) {
         let favourites = this.state.userData.FavouriteMovies;
-        alert('1');
-        if (favourites.indexOf(movie) < 0) {
-            alert('2');
-            favourites.push(movie);
-        }
+        if (favourites.indexOf(movie) < 0) favourites.push(movie);
         this.setState((prevState)=>({
                 ...prevState,
                 userData: {
@@ -22871,7 +22867,7 @@ class MainView extends _reactDefault.default.Component {
         return(/*#__PURE__*/ _jsxRuntime.jsxs(_reactRouterDom.BrowserRouter, {
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 139
+                lineNumber: 137
             },
             __self: this,
             children: [
@@ -22880,21 +22876,21 @@ class MainView extends _reactDefault.default.Component {
                     ,
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 141
+                        lineNumber: 139
                     },
                     __self: this
                 }),
                 /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 143
+                        lineNumber: 141
                     },
                     __self: this,
                     children: user && /*#__PURE__*/ _jsxRuntime.jsxs(_reactRouterDom.Link, {
                         to: `/users/${user}`,
                         __source: {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 144
+                            lineNumber: 142
                         },
                         __self: this,
                         children: [
@@ -22907,7 +22903,7 @@ class MainView extends _reactDefault.default.Component {
                     className: "main-view justify-content-md-center",
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 147
+                        lineNumber: 145
                     },
                     __self: this,
                     children: [
@@ -22936,7 +22932,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 148
+                                lineNumber: 146
                             },
                             __self: this
                         }),
@@ -22954,7 +22950,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 163
+                                lineNumber: 161
                             },
                             __self: this
                         }),
@@ -22977,7 +22973,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 168
+                                lineNumber: 166
                             },
                             __self: this
                         }),
@@ -22996,7 +22992,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 174
+                                lineNumber: 172
                             },
                             __self: this
                         }),
@@ -23015,7 +23011,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 179
+                                lineNumber: 177
                             },
                             __self: this
                         }),
@@ -23038,7 +23034,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 184
+                                lineNumber: 182
                             },
                             __self: this
                         }),
@@ -23060,7 +23056,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 194
+                                lineNumber: 192
                             },
                             __self: this
                         }),
@@ -23082,7 +23078,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 202
+                                lineNumber: 200
                             },
                             __self: this
                         })
@@ -40249,7 +40245,7 @@ function ProfileView(props) {
     const currentUser = localStorage.getItem('user');
     const { movies , userData  } = props;
     console.log(userData, 'userdata');
-    const favorites = movies.filter((movie)=>userData.FavouriteMovies.indexOf(movie._id) > -1
+    const favourites = movies.filter((movie)=>userData.FavouriteMovies.indexOf(movie._id) > -1
     );
     const handleRemoveFromFavourites = (movieId)=>{
         // e.preventDefault();
@@ -40614,7 +40610,7 @@ function ProfileView(props) {
                                 lineNumber: 180
                             },
                             __self: this,
-                            children: favorites.map((m)=>{
+                            children: favourites.map((m)=>{
                                 return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
                                     xs: 12,
                                     md: 6,

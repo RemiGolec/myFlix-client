@@ -43,10 +43,8 @@ class MainView extends React.Component {
 
   addToFavourites(movie) {
     let favourites = this.state.userData.FavouriteMovies;
-    alert('1');
 
     if (favourites.indexOf(movie) < 0) {
-      alert('2');
       favourites.push(movie);
     }
 
