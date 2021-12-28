@@ -26,6 +26,7 @@ class MainView extends React.Component {
       userData: {}
     };
     this.onLoggedOut = this.onLoggedOut.bind(this);
+    this.addToFavourites = this.addToFavourites.bind(this);
   }
 
   componentDidMount() {
@@ -38,6 +39,23 @@ class MainView extends React.Component {
       this.getMovies(accessToken);
       this.getUserData(accessToken);
     }
+  }
+
+  addToFavourites(movie) {
+    let favourites = this.state.userData.FavouriteMovies;
+
+    if (favourites.indexOf(movie) < 0) {
+      favourites.push(movie);
+    }
+
+    this.setState(prevState => ({
+      ...prevState,
+      userData: {
+        ...prevState.userData,
+        FavouriteMovies: favourites
+      }
+    })
+    );
   }
 
   getMovies(token) {
@@ -133,9 +151,10 @@ class MainView extends React.Component {
             console.log("rootpath");
             return movies.map(m => (
               <Col md={3} key={m._id}>
-                <MovieCard movie={m} />
+                <MovieCard movie={m} addToFavourites={this.addToFavourites} />
 
               </Col>
+
             ))
           }} />
 
@@ -146,7 +165,7 @@ class MainView extends React.Component {
 
           <Route exact path={`/users/:username`} render={({ history }) => {
             if (!user) return <Redirect to="/" />
-            return <ProfileView userData={userData} user={user} onBackClick={() => history.goBack()} movies={movies} />
+            return <ProfileView userData={userData} user={user} onBackClick={() => history.goBack()} onLoggedOut={() => this.onLoggedOut()} movies={movies} />
 
           }} />
 
@@ -157,7 +176,7 @@ class MainView extends React.Component {
 
           <Route exact path={`/profile-delete`} render={({ history }) => {
             if (!user) return <Redirect to="/" />
-            return <ProfileDelete userData={userData} user={user} />
+            return <ProfileDelete userData={userData} user={user} onBackClick={() => history.goBack()} />
           }} />
 
           <Route exact path="/movies/:movieId" render={({ match, history }) => {
@@ -185,7 +204,6 @@ class MainView extends React.Component {
                 onBackClick={() => history.goBack()} />
             </Col>
           }} />
-
 
         </Row>
       </Router>

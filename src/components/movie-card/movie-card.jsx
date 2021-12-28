@@ -6,8 +6,9 @@ import './movie-card.scss';
 import axios from 'axios';
 
 export class MovieCard extends React.Component {
+
   render() {
-    let { movie } = this.props;
+    let { movie, addToFavourites } = this.props;
     const currentUser = localStorage.getItem('user');
     const token = localStorage.getItem('token');
     console.log(token, 'token');
@@ -25,6 +26,7 @@ export class MovieCard extends React.Component {
           const data = response.data;
           console.log(data);
           alert("movie added to favourites");
+          addToFavourites(movie._id);
         })
         .catch(e => {
           console.log('error adding movie to favourites');

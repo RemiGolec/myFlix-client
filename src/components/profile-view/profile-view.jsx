@@ -1,24 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import { Card, CardGroup, Form, Button, ButtonGroup, ButtonToolbar, Row, Col, Image } from 'react-bootstrap';
+import { Card, CardGroup, Form, Button, ButtonGroup, ButtonToolbar, Row, Col, Image, Figure } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import './profile-view.scss';
 import { BrowserRouter as Router, Route, Redirect, Link } from "react-router-dom";
 import axios from 'axios';
+import FigureImage from 'react-bootstrap/esm/FigureImage';
+
 
 export function ProfileView(props) {
     console.log('props: ', props);
 
-    // ---------  VARIABLES FOR UPDATE USER FORM
+
     const [username, setUsername] = useState(props.userData.Username);
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState(props.userData.Email);
     const [birthday, setBirthday] = useState(props.userData.Birthday);
-
-
+    const token = localStorage.getItem('token');
+    const userInfo = {
+        Username: username,
+        Password: password,
+        Email: email,
+        Birthday: birthday
+    }
     const currentUser = localStorage.getItem('user');
     const { movies, userData } = props;
     console.log(userData, 'userdata');
-    const favorites = movies.filter(movie => userData.FavouriteMovies.indexOf(movie._id) > -1);
+
+    const favourites = movies.filter(movie => (
+        userData.FavouriteMovies && userData.FavouriteMovies.indexOf(movie._id) > -1
+    ));
 
     const handleRemoveFromFavourites = (movieId) => {
         // e.preventDefault();
@@ -41,6 +51,32 @@ export function ProfileView(props) {
             });
     };
 
+    const handleUpdateUser = (e) => {
+        e.preventDefault();
+        /* Send a request to the server for authentication */
+        axios.put('https://morning-badlands-52426.herokuapp.com/users/' + props.userData.Username,
+            userInfo,
+            {
+                headers: { Authorization: `Bearer ${token}` },
+            })
+            /* then call props.onRegistration(username) */
+            .then(response => {
+                const data = response.data;
+                console.log(data);
+                alert("user updated");
+                localStorage.setItem('user', username);
+                location.reload();
+                props.history.push("/");
+            })
+            .catch(e => {
+                console.log('wrong format or incomplete data');
+                alert('fill in all the fields in correct format');
+            });
+    };
+
+
+
+
     useEffect(() => {
 
     }, [])
@@ -49,49 +85,12 @@ export function ProfileView(props) {
 
         <>
             <Row xs={1} md={1} lg={2} className="g-5">
-                {/*  ----------------   USER PROFILE + FAV MOVIES */}
+                {/*  ----------------   USER PROFILE */}
                 <Col >
                     < Card >
                         <Card.Body className="card_fav_list">
                             <Card.Title>Profile Name: {userData.Username}</Card.Title>
                             <Card.Text>Email: {userData.Email}</Card.Text>
-                            <Card.Header>Favorite movies</Card.Header>
-
-
-                            {/* {
-                                favorites.map(m => {
-                                    return (
-
-                                        <Row>
-                                            <Col>
-                                                <Image
-                                                    variant="top"
-                                                    src={m.ImagePath}
-                                                    crossOrigin="anonymous"
-                                                    alt="Card image"
-                                                    className="image_fav_list"
-                                                />
-                                            </Col>
-                                            <Col>
-                                                <Card.Title>
-                                                    <Link key={m._id} to={`/movies/${m._id}`}>
-                                                        <div><Button variant="link">{m.Title}</Button></div>
-                                                    </Link>
-                                                </Card.Title>
-                                                <Button
-                                                    variant="outline-dark"
-                                                    type="submit"
-                                                    onClick={() => handleRemoveFromFavourites(m._id)}>
-                                                    Remove
-                                                </Button>
-                                            </Col>
-                                        </Row>
-
-                                    )
-                                })
-                            } */}
-
-
                             <ButtonGroup className="me-2" aria-label="First group">
                                 <Button
                                     className="button"
@@ -155,15 +154,8 @@ export function ProfileView(props) {
                                         className="button"
                                         variant="warning"
                                         type="submit"
-                                    // onClick={handleUpdateUser}
-                                    >
+                                        onClick={handleUpdateUser}>
                                         Update Profile
-                                    </Button>
-                                    <Button
-                                        className="button"
-                                        variant="dark"
-                                        onClick={() => props.history.push("/")}>
-                                        go to Login
                                     </Button>
                                     <Link to={'/profile-delete'} >
                                         <Button
@@ -178,34 +170,47 @@ export function ProfileView(props) {
                 </Col>
             </Row>
 
-            {/*  ----------------  EXP FAV MOVIES LIST */}
-            <Row>
-                <Col xs={12}>
-                    <h2>FAVOURITE MOVIES</h2>
-                </Col>
-            </Row>
-            <Row>
-                {favorites.map(m => {
-                    return (
-                        <Col xs={12} md={6} lg={3} key={m._id}>
-                            <img
-                                src={m.ImagePath}
-                                crossOrigin="anonymous"
-                                className="image_fav_list" />
-                            <Link to={`/movies/${m._id}`}>
-                                <h4>{m.Title}</h4>
-                            </Link>
-                            <Button
-                                variant="outline-info"
-                                onClick={() => handleRemoveFromFavourites(m._id)}>
-                                remove from list
-                            </Button>
-
+            {/*  ----------------   FAV MOVIES LIST */}
+            <Card className="fav-movies-card">
+                <Card.Body>
+                    <Row>
+                        <Col xs={12}>
+                            <Card.Title>
+                                Favourite Movies
+                            </Card.Title>
                         </Col>
-                    )
-                })
-                }
-            </Row>
+                    </Row>
+                    <Row>
+                        {favourites.map(m => {
+                            return (
+                                <Col xs={12} md={6} lg={3} key={m._id} className="fav-movie" >
+                                    <Figure>
+                                        <Link to={`/movies/${m._id}`}>
+                                            <Figure.Image
+                                                src={m.ImagePath}
+                                                width={150}
+                                                alt={m.Title}
+                                                crossOrigin="anonymous"
+                                                className="image_fav_list" />
+                                            <Figure.Caption>
+                                                {m.Title}
+                                            </Figure.Caption>
+                                        </Link>
+                                        <Button
+                                            variant="outline-info"
+                                            onClick={() => handleRemoveFromFavourites(m._id)}>
+                                            Remove
+                                        </Button>
+                                    </Figure>
+
+                                </Col>
+                            )
+                        })
+                        }
+                    </Row>
+                </Card.Body>
+            </Card>
+
         </>
     )
 }

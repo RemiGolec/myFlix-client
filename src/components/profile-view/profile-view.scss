@@ -1,12 +1,47 @@
+$s-color: #3bfaee;
+
 .button {
     margin-right: 10px;
 }
 
-.image_fav_list {
-    width: 5em;
+.fav-movie {
+    margin-bottom: 15px;
+    
+    figure {
+        position: relative;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        margin: auto;
+        width: 100%;
+        
+        img {
+            height: 350px;
+            width: auto;
+            margin: auto;
+            display: block;
+        }
+    }
+    button.btn {
+        margin: auto;
+        display: block;
+    }
+    .figure-caption {
+        text-align: center;
+    }
+    a {
+        text-decoration: none;
+    }
 }
 
-// .card_fav_list {
-//     background-color: black;
-//     color: whitesmoke;
-// }
+
+.fav-movies-card.card {
+        background:rgb(0, 0, 0);
+        color: white;
+    }
+
+
+.card-group {
+    margin-bottom: 25px;
+}
+
