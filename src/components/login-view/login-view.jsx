@@ -75,7 +75,7 @@ export function LoginView({
                     <ButtonGroup className="me-5">
                       <Button
                         className="button"
-                        variant="dark"
+                        variant="info"
                         type="submit"
                         onClick={handleSubmit}>
                         Login
@@ -84,7 +84,7 @@ export function LoginView({
                     <ButtonGroup>
                       <Button
                         className="button"
-                        variant="dark"
+                        variant="outline-info"
                         type="submit"
                         onClick={handleClickRegister}>
                         Register here

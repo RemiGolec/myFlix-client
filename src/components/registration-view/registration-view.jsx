@@ -10,34 +10,75 @@ import Logo from '../../logo/logo.png'
 import axios from 'axios';
 
 export function RegistrationView(props) {
-  console.log("props: ", props);
+  console.log('props: ', props);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [birthday, setBirthday] = useState('');
+  const [usernameErr, setUsernameErr] = useState('');
+  const [passwordErr, setPasswordErr] = useState('');
+  const [emailErr, setEmailErr] = useState('');
+  const [birthdayErr, setBirthdayErr] = useState('');
+
+  const validate = () => {
+
+    let isReq = true;
+
+    if (!username) {
+      setUsernameErr('Username Required');
+      isReq = false;
+    } else if (username.length < 2) {
+      setUsernameErr('Username must be min. 2 characters long');
+      isReq = false;
+    }
+    if (!password) {
+      setPasswordErr('Password Required');
+      isReq = false;
+    } else if (password.length < 6) {
+      setPasswordErr('Password min 6 characters long');
+      isReq = false;
+    }
+    if (!email) {
+      setEmailErr('Email Required');
+      isReq = false;
+    } else if (email.indexOf('@') === -1 && email.indexOf('.') === -1) {
+      setEmailErr('Email is invalid');
+      isReq = false;
+    }
+    if (!birthday) {
+      setBirthdayErr('Birthday Required');
+      isReq = false;
+    }
+
+    return isReq;
+  }
 
   const handleRegister = (e) => {
+
     e.preventDefault();
-    /* Send a request to the server for authentication */
-    axios.post('https://morning-badlands-52426.herokuapp.com/users', {
-      // axios.post('https://localhost:5000/users', {
-      Username: username,
-      Password: password,
-      Email: email,
-      Birthday: birthday
-    })
-      /* then call props.onRegistration(username) */
-      .then(response => {
-        const data = response.data;
-        console.log(data);
-        alert("successful registration");
-        // props.onRegistration(data);
-        props.history.push("/");
+    const isReq = validate();
+
+    if (isReq) {
+      axios.post('https://morning-badlands-52426.herokuapp.com/users', {
+        // axios.post('https://localhost:5000/users', {
+        Username: username,
+        Password: password,
+        Email: email,
+        Birthday: birthday
       })
-      .catch(e => {
-        console.log('wrong format or incomplete data');
-        alert('fill in all the fields in correct format');
-      });
+        /* then call props.onRegistration(username) */
+        .then(response => {
+          const data = response.data;
+          console.log(data);
+          alert('Successful registration, please login');
+          props.history.push('/');
+
+        })
+        .catch(response => {
+          console.error('response');
+          alert('unable to register');
+        });
+    }
   };
 
 
@@ -61,48 +102,48 @@ export function RegistrationView(props) {
                       <Form.Group>
                         <Form.Label>Username:</Form.Label>
                         <Form.Control
-                          type="text"
                           value={username}
-                          onChange={e => setUsername(e.target.value)}
                           placeholder="Enter a username"
-                          required />
+                          onChange={e => setUsername(e.target.value)} />
+                        {usernameErr && <p>{usernameErr}</p>}
                       </Form.Group>
                       <Form.Group>
                         <Form.Label>Password:</Form.Label>
                         <Form.Control
-                          type="password"
                           value={password}
-                          placeholder="Minimum 8 characters"
-                          onChange={e => setPassword(e.target.value)}
-                          minLength="8"
-                          required />
+                          placeholder="Minimum 6 characters"
+                          onChange={e => setPassword(e.target.value)} />
+                        {passwordErr && <p>{passwordErr}</p>}
                       </Form.Group>
                       <Form.Group>
                         <Form.Label>Email:</Form.Label>
                         <Form.Control
-                          type="email"
                           value={email}
                           placeholder="Enter Your email address"
-                          onChange={e => setEmail(e.target.value)}
-                          required />
+                          onChange={e => setEmail(e.target.value)} />
+                        {emailErr && <p>{emailErr}</p>}
                       </Form.Group>
                       <Form.Group>
                         <Form.Label>Birthday:</Form.Label>
                         <Form.Control
                           type="date"
-                          // pattern="\d{4}[\-]\d{2}[\-]\d{2}"
                           value={birthday}
-                          onChange={e => setBirthday(e.target.value)}
-                          required />
+                          onChange={e => setBirthday(e.target.value)} />
+                        {birthdayErr && <p>{birthdayErr}</p>}
                       </Form.Group>
                       <Button
                         className="button"
-                        variant="dark"
+                        variant="info"
                         type="submit"
                         onClick={handleRegister}>
                         Submit
                       </Button>
-                      <Button onClick={() => props.history.push("/")}>go to Login</Button>
+                      <Button
+                        className="button"
+                        variant="outline-info"
+                        onClick={() => props.history.push("/")}>
+                        go to Login
+                      </Button>
                     </Form>
                   </Card.Body>
                 </Card>

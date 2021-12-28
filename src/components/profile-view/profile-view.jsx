@@ -25,7 +25,10 @@ export function ProfileView(props) {
     const currentUser = localStorage.getItem('user');
     const { movies, userData } = props;
     console.log(userData, 'userdata');
-    const favourites = movies.filter(movie => userData.FavouriteMovies.indexOf(movie._id) > -1);
+
+    const favourites = movies.filter(movie => (
+        userData.FavouriteMovies && userData.FavouriteMovies.indexOf(movie._id) > -1
+    ));
 
     const handleRemoveFromFavourites = (movieId) => {
         // e.preventDefault();
