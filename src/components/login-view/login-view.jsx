@@ -84,7 +84,7 @@ export function LoginView({
                     <ButtonGroup>
                       <Button
                         className="button"
-                        variant="outline-info"
+                        variant="outline-dark"
                         type="submit"
                         onClick={handleClickRegister}>
                         Register here
