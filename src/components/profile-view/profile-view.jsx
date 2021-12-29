@@ -65,7 +65,7 @@ export function ProfileView(props) {
                 console.log(data);
                 alert("user updated");
                 localStorage.setItem('user', username);
-                location.reload();
+                // location.reload();
                 props.history.push("/");
             })
             .catch(e => {
