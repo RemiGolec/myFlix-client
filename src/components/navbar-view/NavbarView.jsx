@@ -1,6 +1,7 @@
 import React from 'react';
-import { Container, Navbar, Nav } from 'react-bootstrap';
+import { Col, Container, Navbar, Nav } from 'react-bootstrap';
 import Logo from '../../logo/logo.png';
+import VisibilityFilterInput from '../visibility-filter-input/visibility-filter-input';
 
 export default function NavbarView({ onLoggedOut }) {
   return (

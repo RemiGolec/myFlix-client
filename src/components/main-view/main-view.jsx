@@ -1,13 +1,25 @@
 import React from 'react';
 import './main-view.scss';
 import axios from 'axios';
+import { connect } from 'react-redux';
+
 import { Container, Row, Col, Navbar, Nav, Button } from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Redirect, Link } from "react-router-dom";
+
+// #0
+import { setMovies } from '../../actions/actions';
+import MovieList from '../movies-list/movies-list';
 
 import { RegistrationView } from '../registration-view/registration-view';
 import { LoginView } from '../login-view/login-view';
 import { ProfileView } from '../profile-view/profile-view';
-import { MovieCard } from '../movie-card/movie-card';
+
+/* ------  
+  Below { MovieCard } import statement removed. 
+  It will be imported and used in the MoviesList component rather than in here. 
+--------*/
+// import { MovieCard } from '../movie-card/movie-card';
+
 import { MovieView } from '../movie-view/movie-view';
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
@@ -15,13 +27,12 @@ import NavbarView from '../navbar-view/NavbarView';
 import { ProfileUpdate } from '../profile-update/profile-update';
 import { ProfileDelete } from '../delete-profile-view/delete-profile-view';
 
-
+// #2 export keyword removed from here ????
 class MainView extends React.Component {
 
   constructor() {
     super();
     this.state = {
-      movies: [],
       user: null,
       userData: {}
     };
@@ -64,11 +75,9 @@ class MainView extends React.Component {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
-        console.log('movies: ', response.data);
+        console.log('setMovies: ', response.data);
         // Assign the result to the state
-        this.setState({
-          movies: response.data
-        });
+        this.props.setMovies(response.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -124,13 +133,11 @@ class MainView extends React.Component {
   }
 
   render() {
-    const { movies, user, userData } = this.state;
+
+    // #5 movies is extracted from this.props rather than from the this.state
+    const { movies } = this.props;
+    const { user, userData } = this.state;
     console.log('user: ', user);
-    // if (!user) return <RegistrationView onRegistration={user => this.onRegistration(user)} />;
-
-    // if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
-
-
 
     return (
 
@@ -149,13 +156,14 @@ class MainView extends React.Component {
             </Col>
             if (movies.length === 0) return <div className="main-view" />;
             console.log("rootpath");
-            return movies.map(m => (
-              <Col md={3} key={m._id}>
-                <MovieCard movie={m} addToFavourites={this.addToFavourites} />
-
-              </Col>
-
-            ))
+            return <MovieList movies={movies} />;
+            /*  ------ code below replaced with code above
+              return movies.map(m => (
+                <Col md={3} key={m._id}>
+                  <MovieCard movie={m} addToFavourites={this.addToFavourites} />
+                </Col>
+              ))
+            ---------  */
           }} />
 
           <Route exact path="/register" render={({ history }) => {
@@ -213,6 +221,10 @@ class MainView extends React.Component {
 
 }
 
+let mapStateToProps = state => {
+  return { movies: state.movies }
+}
 
-export default MainView;
+export default connect(mapStateToProps, { setMovies })(MainView);
+
 
