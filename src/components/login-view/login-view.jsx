@@ -50,8 +50,8 @@ export function LoginView({
       <div className="form-container">
         <Row>
           <Col>
-            <Card>
-              <Card.Body>
+            <Card >
+              <Card.Body className="card">
                 <Card.Title>Please Login</Card.Title>
                 <Form>
                   <Form.Group controlId="formUsername">
@@ -84,7 +84,7 @@ export function LoginView({
                     <ButtonGroup>
                       <Button
                         className="button"
-                        variant="outline-dark"
+                        variant="outline-info"
                         type="submit"
                         onClick={handleClickRegister}>
                         Register here

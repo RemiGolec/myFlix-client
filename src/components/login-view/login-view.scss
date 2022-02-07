@@ -2,10 +2,19 @@ $color: #34a8eb;
 
 .login-container {
     background-image: 
-    radial-gradient(ellipse,rgba(0, 0, 0, 0.18),rgba(20, 20, 20, 1)),
-    url("../../images/Screenshot\ 2022-02-06\ at\ 20.24.20.png");
+    radial-gradient(ellipse,rgba(0, 0, 0, 0),rgba(20, 20, 20, 1)),
+    url("../../images/Artboard\ 1.png");
     background-repeat: no-repeat;
     background-size:cover;
     height: 80vh;
 }
 
+.card {
+    background-color: rgba(0, 0, 0, 0.502) !important;
+    border-style: none !important;
+    color:rgb(255, 255, 255); 
+}
+
+.card-body {
+    padding: 4em !important;
+}
