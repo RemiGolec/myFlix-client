@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { Form, Button, Card, CardGroup, Container, Col, Row } from 'react-bootstrap';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 
-import React, { useState } from 'react';
 import axios from 'axios';
 
 
