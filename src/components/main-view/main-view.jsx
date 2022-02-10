@@ -7,7 +7,7 @@ import { Container, Row, Col, Navbar, Nav, Button } from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Redirect, Link } from "react-router-dom";
 
 // #0
-import { setMovies } from '../../actions/actions';
+import { setMovies, setUser } from '../../actions/actions';
 import MovieList from '../movies-list/movies-list';
 
 import { RegistrationView } from '../registration-view/registration-view';
@@ -27,7 +27,6 @@ import NavbarView from '../navbar-view/NavbarView';
 import { ProfileUpdate } from '../profile-update/profile-update';
 import { ProfileDelete } from '../delete-profile-view/delete-profile-view';
 
-// #2 export keyword removed from here ????
 class MainView extends React.Component {
 
   constructor() {
@@ -43,10 +42,12 @@ class MainView extends React.Component {
   componentDidMount() {
     let accessToken = localStorage.getItem('token');
     if (accessToken !== null) {
-      this.setState({
-        // user is the Username string
-        user: localStorage.getItem('user'),
-      });
+      this.props.setUser(localStorage.getItem('user'));
+      // Below code replaced by code above
+      // this.setState({
+      //   // user is the Username string
+      //   user: localStorage.getItem('user'),
+      // });
       this.getMovies(accessToken);
       this.getUserData(accessToken);
     }
@@ -102,9 +103,11 @@ class MainView extends React.Component {
 
   onLoggedIn(authData) {
     console.log('authData: ', authData);
-    this.setState({
-      user: authData.user.Username,
-    });
+    this.props.setUser(authData.user.Username);
+    // Code below replaced with code above
+    // this.setState({
+    //   user: authData.user.Username,
+    // });
 
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
@@ -123,7 +126,7 @@ class MainView extends React.Component {
 
 
   /*When a movie is clicked, 
-  sthis function is invoked and 
+  this function is invoked and 
   updates the state of the `selectedMovie` *property to that movie*/
 
   setSelectedMovie(movie) {
@@ -136,7 +139,7 @@ class MainView extends React.Component {
 
     // #5 movies is extracted from this.props rather than from the this.state
     const { movies } = this.props;
-    const { user, userData } = this.state;
+    const { user, userData } = this.props;
     console.log('user: ', user);
 
     return (
@@ -222,9 +225,9 @@ class MainView extends React.Component {
 }
 
 let mapStateToProps = state => {
-  return { movies: state.movies }
+  return { movies: state.movies, user: state.user }
 }
 
-export default connect(mapStateToProps, { setMovies })(MainView);
+export default connect(mapStateToProps, { setMovies, setUser })(MainView);
 
 
