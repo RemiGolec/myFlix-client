@@ -25872,10 +25872,10 @@ class MainView extends _reactDefault.default.Component {
     onLoggedOut() {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
-        this.setState({
-            user: null
-        });
-    // TODO: Redirect to "/"
+        this.props.setUser(localStorage.getItem('user'));
+    // this.setState({
+    //   user: null
+    // });
     }
     /*When a movie is clicked, 
   this function is invoked and 

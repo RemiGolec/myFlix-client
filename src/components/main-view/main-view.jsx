@@ -117,10 +117,10 @@ class MainView extends React.Component {
   onLoggedOut() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    this.setState({
-      user: null
-    });
-    // TODO: Redirect to "/"
+    this.props.setUser(localStorage.getItem('user'));
+    // this.setState({
+    //   user: null
+    // });
   }
 
 
