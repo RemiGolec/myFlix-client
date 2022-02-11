@@ -15,6 +15,14 @@ export function ProfileView(props) {
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState(props.userData.Email);
     const [birthday, setBirthday] = useState(props.userData.Birthday);
+
+    useEffect(() => {
+        setUsername(props.userData.Username);
+        // setPassword(props.password);
+        setEmail(props.userData.Email);
+        setBirthday(props.userData.Birthday);
+    }, [props.userData.Username]);
+
     const token = localStorage.getItem('token');
     const userInfo = {
         Username: username,
@@ -29,6 +37,10 @@ export function ProfileView(props) {
     const favourites = movies.filter(movie => (
         userData.FavouriteMovies && userData.FavouriteMovies.indexOf(movie._id) > -1
     ));
+
+
+
+
 
     const handleRemoveFromFavourites = (movieId) => {
         // e.preventDefault();

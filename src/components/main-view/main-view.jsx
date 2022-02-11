@@ -32,7 +32,6 @@ class MainView extends React.Component {
   constructor() {
     super();
     this.state = {
-      user: null,
       userData: {}
     };
     this.onLoggedOut = this.onLoggedOut.bind(this);
@@ -55,8 +54,9 @@ class MainView extends React.Component {
 
   addToFavourites(movie) {
     let favourites = this.state.userData.FavouriteMovies;
-
+    console.log(favourites, movie, 'favourites');
     if (favourites.indexOf(movie) < 0) {
+      console.log('inside if condition');
       favourites.push(movie);
     }
 
@@ -138,8 +138,8 @@ class MainView extends React.Component {
   render() {
 
     // #5 movies is extracted from this.props rather than from the this.state
-    const { movies } = this.props;
-    const { user, userData } = this.props;
+    const { movies, user } = this.props;
+    const { userData } = this.state;
     console.log('user: ', user);
 
     return (
@@ -159,7 +159,7 @@ class MainView extends React.Component {
             </Col>
             if (movies.length === 0) return <div className="main-view" />;
             console.log("rootpath");
-            return <MovieList movies={movies} />;
+            return <MovieList movies={movies} addToFavourites={this.addToFavourites} />;
             /*  ------ code below replaced with code above
               return movies.map(m => (
                 <Col md={3} key={m._id}>

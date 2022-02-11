@@ -26,7 +26,9 @@ export class MovieCard extends React.Component {
           const data = response.data;
           console.log(data);
           alert("movie added to favourites");
+          console.log(movie._id, 'movie id');
           addToFavourites(movie._id);
+          console.log('after movie id');
         })
         .catch(e => {
           console.log('error adding movie to favourites');
