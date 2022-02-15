@@ -56,6 +56,8 @@ export function ProfileView(props) {
                 console.log(data);
                 alert("movie removed from favourites");
                 location.reload();
+
+
             })
             .catch(e => {
                 console.log('error removing movie from favourites');
