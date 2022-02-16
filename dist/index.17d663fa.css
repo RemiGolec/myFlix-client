@@ -83,7 +83,7 @@
   background-image: radial-gradient(ellipse, rgba(0, 0, 0, 0.18), #141414), url("Artboard 1.274d1648.png");
   background-repeat: no-repeat;
   background-size: cover;
-  height: 80vh;
+  height: 100%;
   background-position: center;
 }
 
@@ -101,7 +101,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  height: 80vh;
+  height: 100%;
 }
 
 .card {

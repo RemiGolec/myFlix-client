@@ -25872,7 +25872,7 @@ class MainView extends _reactDefault.default.Component {
     onLoggedOut() {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
-        this.props.setUser(localStorage.getItem('user'));
+        this.props.setUser(null);
     // this.setState({
     //   user: null
     // });
