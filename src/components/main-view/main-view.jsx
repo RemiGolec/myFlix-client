@@ -175,7 +175,7 @@ class MainView extends React.Component {
           }} />
 
           <Route exact path={`/users/:username`} render={({ history }) => {
-            if (!user) return <Redirect to="/" />
+
             return <ProfileView userData={userData} user={user} onBackClick={() => history.goBack()} onLoggedOut={() => this.onLoggedOut()} movies={movies} />
 
           }} />

@@ -89,12 +89,6 @@ export function ProfileView(props) {
     };
 
 
-
-
-    useEffect(() => {
-
-    }, [])
-
     return (
 
         <>
