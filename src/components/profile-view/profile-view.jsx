@@ -9,7 +9,7 @@ import FigureImage from 'react-bootstrap/esm/FigureImage';
 
 export function ProfileView(props) {
     console.log('props: ', props);
-
+    let { removeFromFavourites } = props;
 
     const [username, setUsername] = useState(props.userData.Username);
     const [password, setPassword] = useState('');
@@ -38,10 +38,6 @@ export function ProfileView(props) {
         userData.FavouriteMovies && userData.FavouriteMovies.indexOf(movie._id) > -1
     ));
 
-
-
-
-
     const handleRemoveFromFavourites = (movieId) => {
         // e.preventDefault();
         const token = localStorage.getItem('token');
@@ -55,8 +51,7 @@ export function ProfileView(props) {
                 const data = response.data;
                 console.log(data);
                 alert("movie removed from favourites");
-                location.reload();
-
+                removeFromFavourites(movieId);
 
             })
             .catch(e => {

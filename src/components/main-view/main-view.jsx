@@ -36,6 +36,7 @@ class MainView extends React.Component {
     };
     this.onLoggedOut = this.onLoggedOut.bind(this);
     this.addToFavourites = this.addToFavourites.bind(this);
+    this.removeFromFavourites = this.removeFromFavourites.bind(this);
   }
 
   componentDidMount() {
@@ -68,6 +69,17 @@ class MainView extends React.Component {
       }
     })
     );
+  }
+
+  removeFromFavourites(movieId) {
+    let currFavourites = this.state.userData.FavouriteMovies;
+    let favourites = currFavourites.filter(mId => {
+      return mId !== movieId
+    });
+    let userData = { ...this.state.userData };
+    userData.FavouriteMovies = favourites;
+    this.setState({ userData });
+
   }
 
   getMovies(token) {
@@ -176,7 +188,7 @@ class MainView extends React.Component {
 
           <Route exact path={`/users/:username`} render={({ history }) => {
 
-            return <ProfileView userData={userData} user={user} onBackClick={() => history.goBack()} onLoggedOut={() => this.onLoggedOut()} movies={movies} />
+            return <ProfileView removeFromFavourites={this.removeFromFavourites} userData={userData} user={user} onBackClick={() => history.goBack()} onLoggedOut={() => this.onLoggedOut()} movies={movies} />
 
           }} />
 
