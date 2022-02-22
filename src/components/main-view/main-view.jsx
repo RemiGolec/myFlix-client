@@ -163,7 +163,6 @@ class MainView extends React.Component {
         <Row>
           {user && <Link to={`/users/${user}`} >logged in as {user}</Link>}
         </Row>
-
         <Row className="main-view justify-content-md-center">
           <Route exact path="/" render={({ history }) => {
             if (!user) return <Col>

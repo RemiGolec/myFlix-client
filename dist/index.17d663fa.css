@@ -79,14 +79,6 @@
   margin-top: 15px;
 }
 
-.registration-background-container {
-  background-image: radial-gradient(ellipse, rgba(0, 0, 0, 0.18), #141414), url("Artboard 1.274d1648.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 100%;
-  background-position: center;
-}
-
 .card {
   background-color: rgba(0, 0, 0, 0.502) !important;
   border-style: none !important;
@@ -96,16 +88,7 @@
 .card-body {
   padding: 4em !important;
 }
-.login-container {
-  background-image: radial-gradient(ellipse, rgba(0, 0, 0, 0), #141414), url("Screenshot Outside.99cc07da.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  height: 100%;
-}
-
 .card {
-  background-color: rgba(0, 0, 0, 0.502) !important;
   border-style: none !important;
   color: white;
 }
@@ -161,7 +144,11 @@
   color: rgba(255, 255, 255, 0.844);
 }
 .app-container {
-  background-color: #141414;
+  background-color: #6371aa;
   min-height: 100vh;
+  background-image: radial-gradient(ellipse, rgba(0, 0, 0, 0), #141414), url("Screenshot Outside.99cc07da.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 /*# sourceMappingURL=index.17d663fa.css.map */

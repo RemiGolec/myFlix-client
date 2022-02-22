@@ -1,5 +1,5 @@
 $color: black;
-$background-color: #141414;
+$background-color: #6371aa;
 
 $link-color: #71e8eec1;
 
@@ -12,6 +12,12 @@ $s-dark: #34b5bc;
 .app-container {
     background-color: $background-color;
     min-height: 100vh;
+    background-image: 
+    radial-gradient(ellipse,rgba(0, 0, 0, 0),rgba(20, 20, 20, 1)),
+    url("../src/images/Screenshot\ Outside.png");
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-position: center;
 }
 
 
